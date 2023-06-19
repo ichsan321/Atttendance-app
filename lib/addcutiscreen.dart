@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:my_project/mainscreen.dart';
 import 'package:my_project/user.dart';
+import 'package:progress_dialog/progress_dialog.dart';
+import 'package:http/http.dart' as http;
+import 'package:toast/toast.dart';
+
+String urlUpload =
+    "https://myattendance-test.000webhostapp.com/php/add_cuti.php";
 
 class addcuti extends StatefulWidget {
   final User user;
@@ -187,12 +193,51 @@ class _addcutiState extends State<addcuti> {
 
   void _Cutibutton() async {
     print("this is izin button");
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => (Maincsreen(
-                user: widget.user,
-              ))),
-    );
+    print(widget.user.email);
+    print(startdateinput.text);
+    print(enddateinput.text);
+
+    DateTime awal = DateTime.parse(startdateinput.text);
+    DateTime akhir = DateTime.parse(enddateinput.text);
+    Duration diff = akhir.difference(awal);
+
+    print(diff.inDays);
+
+    if ((startdateinput != null && enddateinput != null && cutiinput != null)) {
+      ProgressDialog pr = new ProgressDialog(context,
+          type: ProgressDialogType.Normal, isDismissible: false);
+      pr.style(message: "in progress");
+      pr.show();
+      http.post(Uri.parse(urlUpload), body: {
+        'email': widget.user.email,
+        'dateawal': (startdateinput.text).toString(),
+        'dateakhir': (enddateinput.text).toString(),
+        'keterangan': cutiinput.text,
+        'totalcuti': diff.inDays.toString(),
+      }).then((res) {
+        print(res.statusCode);
+        print(res.body);
+        if (res.body == "success") {
+          Toast.show("Successfully", context,
+              duration: 3, gravity: Toast.CENTER);
+          pr.hide();
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => Maincsreen(
+                        user: widget.user,
+                      )));
+        } else if (res.body == "failed") {
+          Toast.show("There is some trouble with connection", context,
+              duration: 3, gravity: Toast.BOTTOM, backgroundColor: Colors.red);
+          pr.hide();
+        }
+      }).catchError((err) {
+        print(err);
+      });
+    } else {
+      Toast.show(" Please input the column", context,
+          duration: 3, gravity: Toast.BOTTOM);
+    }
   }
 }

@@ -4,6 +4,7 @@ import 'package:my_project/addIzinscreen.dart';
 import 'package:my_project/addSakitscreen.dart';
 import 'package:my_project/addabsenscreen.dart';
 import 'package:my_project/addcutiscreen.dart';
+import 'package:my_project/admin.dart';
 import 'package:my_project/loginscreen.dart';
 import 'package:my_project/Usermodel.dart';
 import 'package:my_project/api_service.dart';
@@ -603,6 +604,7 @@ class _profilescreenState extends State<profilescreen> {
   }
 
   void _sakitscreen() async {
+    print("sakitform");
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -631,6 +633,10 @@ class _profilescreenState extends State<profilescreen> {
 
   void _absenoutButton() async {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => absenKeluar()));
+        context,
+        MaterialPageRoute(
+            builder: (context) => absenKeluar(
+                  user: widget.user,
+                )));
   }
 }

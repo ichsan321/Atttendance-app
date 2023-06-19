@@ -7,11 +7,17 @@ import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:toast/toast.dart';
+import 'dart:convert';
 
 String urlUpload =
     "https://myattendance-test.000webhostapp.com/php/add_absen.php";
 
-String locwismaBsg = "-6.175019394047249, 106.81996316318025";
+String verify = "1";
+
+String loc_latitude_wisma = "-6.175019394047249";
+String loc_longitude_wisma = " 106.81996316318025";
+
+String radius = "10";
 
 class addabsenscreen extends StatefulWidget {
   final User user;
@@ -33,7 +39,7 @@ class _addabsenscreenState extends State<addabsenscreen> {
     'Di Luar',
   ];
   String? selectedValue;
-  String cdate1 = DateFormat("EEEEE, MMMM, dd, yyyy").format(DateTime.now());
+  String cdate1 = DateFormat("yyyy-MM-dd").format(DateTime.now());
   String tdata = DateFormat("HH:mm:ss").format(DateTime.now());
 
   @override
@@ -141,7 +147,7 @@ class _addabsenscreenState extends State<addabsenscreen> {
                           child: InkWell(
                             onTap: (_uploadabsenbutton),
                             child: Center(
-                              child: Text("Applied",
+                              child: Text("Absen",
                                   style: TextStyle(
                                       color: Colors.white, // LOGIN Name
                                       fontFamily: "Poppins-Bold",
@@ -198,10 +204,17 @@ class _addabsenscreenState extends State<addabsenscreen> {
     print(" This is absen button ");
     print(selectedValue);
     print(widget.user.email);
+    print(loc_latitude_wisma);
+    print(loc_longitude_wisma);
+    print(_currentPosition.latitude);
+    print(_currentPosition.longitude);
+    print(radius);
+    print(cdate1);
+    print(verify);
 
     selectedValue = selectedValue.toString();
 
-    if ((selectedValue != null)) {
+    if ((selectedValue != null && selectedValue == 'Wisma BSG')) {
       ProgressDialog pr = new ProgressDialog(context,
           type: ProgressDialogType.Normal, isDismissible: false);
 
@@ -211,13 +224,20 @@ class _addabsenscreenState extends State<addabsenscreen> {
         'email': widget.user.email,
         'location': selectedValue,
         'jam': tdata.toString(),
+        'longitude_w': loc_longitude_wisma.toString(),
+        'latitude_w': loc_latitude_wisma.toString(),
+        'latitude_now': _currentPosition.latitude.toString(),
+        'longitude_now': _currentPosition.longitude.toString(),
+        'radius': radius,
+        'date_on_user': cdate1.toString(),
+        'verify': verify,
       }).then((res) {
         print(res.statusCode);
         print(res.body);
         if (res.body == "success") {
           print("Test di bawah succes");
-          Toast.show(res.body,
-              duration: Toast.lengthLong, gravity: Toast.bottom);
+          Toast.show("Check your registration information", context,
+              duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
           pr.hide();
           Navigator.pushReplacement(
               context,
@@ -225,27 +245,28 @@ class _addabsenscreenState extends State<addabsenscreen> {
                   builder: (BuildContext context) => Maincsreen(
                         user: widget.user,
                       )));
+        } else if (res.body == 'failed 2') {
+          Toast.show("Your location too far from the base site", context,
+              duration: 3, gravity: Toast.BOTTOM, backgroundColor: Colors.red);
+          pr.hide();
+        } else if (res.body == "failed 1") {
+          Toast.show("Sorry Your Attendace have been took before", context,
+              duration: 3,
+              gravity: Toast.BOTTOM,
+              backgroundColor: Color.fromARGB(198, 223, 67, 67));
+          pr.hide();
         }
       }).catchError((err) {
         print(err);
       });
     } else {
-      Toast.show("Check your registration information",
-          textStyle: context,
-          duration: Toast.lengthLong,
-          gravity: Toast.bottom);
+      Toast.show(" Please Select Your Site Location", context,
+          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
     }
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => (Maincsreen(
-                user: widget.user,
-              ))),
-    );
   }
 
   Future<bool> _onBackPressAppBar() async {
-    Navigator.pushReplacement(
+    Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => Maincsreen(

@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:my_project/mainscreen.dart';
 import 'package:my_project/user.dart';
+import 'package:toast/toast.dart';
+import 'package:http/http.dart' as http;
+import 'package:progress_dialog/progress_dialog.dart';
+
+String urlUpload1 =
+    "https://myattendance-test.000webhostapp.com/php/add_sakit.php";
 
 class addSakit extends StatefulWidget {
   final User user;
@@ -149,13 +155,44 @@ class _addSakitState extends State<addSakit> {
   }
 
   void _Sakitbutton() {
-    setState(() {
-      print(" This is absen button ");
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => (Maincsreen(user: widget.user))),
-      );
-    });
+    print("this is izin button");
+    print(widget.user.email);
+    print(dateinput.text);
+    print(sakitinput.text);
+
+    if ((dateinput != null && sakitinput != null)) {
+      ProgressDialog pr = new ProgressDialog(context,
+          type: ProgressDialogType.Normal, isDismissible: false);
+      pr.style(message: "in progress");
+      pr.show();
+      http.post(Uri.parse(urlUpload1), body: {
+        'email': widget.user.email,
+        'date': (dateinput.text).toString(),
+        'keterangan': sakitinput.text,
+      }).then((res) {
+        print(res.statusCode);
+        print(res.body);
+        if (res.body == "success") {
+          Toast.show("Successfully", context,
+              duration: 3, gravity: Toast.CENTER);
+          pr.hide();
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => Maincsreen(
+                        user: widget.user,
+                      )));
+        } else if (res.body == "failed") {
+          Toast.show("There is some trouble with connection", context,
+              duration: 3, gravity: Toast.BOTTOM, backgroundColor: Colors.red);
+          pr.hide();
+        }
+      }).catchError((err) {
+        print(err);
+      });
+    } else {
+      Toast.show(" Please input the column", context,
+          duration: 3, gravity: Toast.BOTTOM);
+    }
   }
 }

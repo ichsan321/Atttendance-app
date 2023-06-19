@@ -419,8 +419,8 @@ class RegisterWidgetState extends State<RegisterWidget> {
         print(res.body);
         if (res.body == "success") {
           print("Test di bawah succes");
-          Toast.show(res.body,
-              duration: Toast.lengthLong, gravity: Toast.bottom);
+          Toast.show("Check your registration information", context,
+              duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
 
           savepref(_email!, _password!);
           _namecontroller.text = '';
@@ -439,10 +439,8 @@ class RegisterWidgetState extends State<RegisterWidget> {
         print(err);
       });
     } else {
-      Toast.show("Check your registration information",
-          textStyle: context,
-          duration: Toast.lengthLong,
-          gravity: Toast.bottom);
+      Toast.show("Check your registration information", context,
+          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
     }
   }
 

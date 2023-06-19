@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:my_project/login_admin.dart';
+import 'package:my_project/loginscreen.dart';
 import 'package:my_project/mainscreen.dart';
 import 'package:my_project/registrationscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 import 'package:http/http.dart' as http;
 import 'package:progress_dialog/progress_dialog.dart';
-import 'user.dart';
-import 'package:my_project/login_admin.dart';
-// import 'package:mytolongbeli/forgotpassword.dart';
+import 'package:my_project/mainscreen_admin.dart';
+import 'package:my_project/admin.dart';
 
 // String urlSecurityCodeForResetPass ="http://michannael.com/mytolongbeli/php/secure_code.php";
-String urlLogin = "https://myattendance-test.000webhostapp.com/php/login.php";
+String urlLogin =
+    "https://myattendance-test.000webhostapp.com/php/login_admin.php";
 
 final TextEditingController _emcontroller = TextEditingController();
 String _email = "";
@@ -20,21 +20,22 @@ final TextEditingController _passcontroller = TextEditingController();
 String _password = "";
 bool _isChecked = false;
 
-class MyApp extends StatelessWidget {
+class Myadmin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: LoginPage(),
+      debugShowCheckedModeBanner: false,
+      home: MyadminPage(),
     );
   }
 }
 
-class LoginPage extends StatefulWidget {
+class MyadminPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _MyadminPageState createState() => _MyadminPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _MyadminPageState extends State<MyadminPage> {
   @override
   void initState() {
     //  loadpref();
@@ -149,7 +150,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: InkWell(
                         onTap: (_onLogin),
                         child: Center(
-                          child: Text("LOGIN USER",
+                          child: Text("LOGIN ADMIN",
                               style: TextStyle(
                                   color: Colors.white, // LOGIN Name
                                   fontFamily: "Poppins-Bold",
@@ -202,10 +203,10 @@ class _LoginPageState extends State<LoginPage> {
                         primary: Colors.indigo, // Background color
                       ),
                       child: Text(
-                        " Log in for admin".toUpperCase(),
+                        "Log in as user".toUpperCase(),
                         style: TextStyle(color: Colors.black),
                       ),
-                      onPressed: _onForgot,
+                      onPressed: _onUserLogin,
                     ),
                   ],
                 ),
@@ -219,42 +220,52 @@ class _LoginPageState extends State<LoginPage> {
   void _onLogin() {
     _email = _emcontroller.text;
     _password = _passcontroller.text;
-    print('login');
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(builder: (context) => Maincsreen()),
-    // );
-    if (_isEmailValid(_email) && (_password.length > 4)) {
-      ProgressDialog pr = new ProgressDialog(context,
-          type: ProgressDialogType.Normal, isDismissible: false);
-      pr.style(message: "Login in");
-      pr.show();
-      http.post(Uri.parse(urlLogin), body: {
-        "email": _email,
-        "password": _password,
-      }).then((res) {
-        print(res.statusCode);
-        var string = res.body;
-        List dres = string.split(",");
-        print(dres);
-        Toast.show(dres[0], context,
-            duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-        if (dres[0] == "success") {
-          pr.hide();
-          // print("Radius:");
-          print(dres);
-          User user = new User(
-              name: dres[1], email: dres[2], phone: dres[3], jabatan: dres[4]);
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => Maincsreen(user: user)));
-        } else {
-          pr.hide();
-        }
-      }).catchError((err) {
-        pr.hide();
-        print(err);
-      });
-    } else {}
+    //   print('login');
+    //   // Navigator.push(
+    //   //   context,
+    //   //   MaterialPageRoute(builder: (context) => Maincsreen()),
+    //   // );
+    //   if (_isEmailValid(_email) && (_password.length > 4)) {
+    //     ProgressDialog pr = new ProgressDialog(context,
+    //         type: ProgressDialogType.Normal, isDismissible: false);
+    //     pr.style(message: "Login in");
+    //     pr.show();
+    //     http.post(Uri.parse(urlLogin), body: {
+    //       "email": _email,
+    //       "password": _password,
+    //     }).then((res) {
+    //       print(res.statusCode);
+    //       var string = res.body;
+    //       List dres = string.split(",");
+    //       print(dres);
+    //       Toast.show(dres[0], context,
+    //           duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+    //       if (dres[0] == "success") {
+    //         pr.hide();
+    //         // print("Radius:");
+    //         print(dres);
+    //         Admin admin = new Admin(
+    //             name: dres[1], email: dres[2], phone: dres[3], jabatan: dres[4]);
+    //         Navigator.push(
+    //             context,
+    //             MaterialPageRoute(
+    //                 builder: (context) => Mainadmincsreen(admin: admin)));
+    //       } else {
+    //         pr.hide();
+    //       }
+    //     }).catchError((err) {
+    //       pr.hide();
+    //       print(err);
+    //     });
+    //   } else {}
+    //
+    //  var string = res.body;
+    //   List dres = string.split(",");
+    //    Admin admin = new Admin(
+    //             email: dres[1], name: dres[2], phone: dres[3], jabatan: dres[4]);
+    var admin;
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => Mainadmincsreen(admin: admin)));
   }
 
   void _onRegister() {
@@ -263,48 +274,47 @@ class _LoginPageState extends State<LoginPage> {
         context, MaterialPageRoute(builder: (context) => RegisterScreen()));
   }
 
-  void _onForgot() {
+  void _onUserLogin() {
     print('Forgot');
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => (Myadmin())));
+        context, MaterialPageRoute(builder: (context) => LoginPage()));
+
+    // if (_isEmailValid(_email)) {
+    //   ProgressDialog pr = new ProgressDialog(context,
+    //       type: ProgressDialogType.Normal, isDismissible: false);
+    //   pr.style(message: "Sending Email");
+    //   pr.show();
+    //   http.post(urlSecurityCodeForResetPass, body: {
+    //     "email": _email,
+    //     "password": _password,
+    //   }).then((res) {
+    //     print("secure code : " + res.body);
+    //     if (res.body == "error") {
+    //       pr.dismiss();
+
+    //       Toast.show('error', context,
+    //           duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+    //     } else {
+    //       pr.dismiss();
+
+    //       _saveEmailForPassReset(_email);
+    //       _saveSecureCode(res.body);
+
+    //       Toast.show('Security code sent to your email', context,
+    //           duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+
+    //       Navigator.push(context,
+    //           MaterialPageRoute(builder: (context) => ResetPassword()));
+    //     }
+    //   }).catchError((err) {
+    //     pr.dismiss();
+    //     print(err);
+    //   });
+    // } else {
+    //   Toast.show('Please put the email first', context,
+    //       duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+    // }
   }
-
-  // if (_isEmailValid(_email)) {
-  //   ProgressDialog pr = new ProgressDialog(context,
-  //       type: ProgressDialogType.Normal, isDismissible: false);
-  //   pr.style(message: "Sending Email");
-  //   pr.show();
-  //   http.post(urlSecurityCodeForResetPass, body: {
-  //     "email": _email,
-  //     "password": _password,
-  //   }).then((res) {
-  //     print("secure code : " + res.body);
-  //     if (res.body == "error") {
-  //       pr.dismiss();
-
-  //       Toast.show('error', context,
-  //           duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-  //     } else {
-  //       pr.dismiss();
-
-  //       _saveEmailForPassReset(_email);
-  //       _saveSecureCode(res.body);
-
-  //       Toast.show('Security code sent to your email', context,
-  //           duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-
-  //       Navigator.push(context,
-  //           MaterialPageRoute(builder: (context) => ResetPassword()));
-  //     }
-  //   }).catchError((err) {
-  //     pr.dismiss();
-  //     print(err);
-  //   });
-  // } else {
-  //   Toast.show('Please put the email first', context,
-  //       duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-  // }
-}
 //   void _saveEmailForPassReset(String code) async {
 //     print('saving preferences');
 //     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -381,12 +391,13 @@ class _LoginPageState extends State<LoginPage> {
 //     }
 //   }
 
-Future<bool> _onBackPressAppBar() async {
-  SystemNavigator.pop();
-  print('Backpress');
-  return Future.value(false);
-}
+  Future<bool> _onBackPressAppBar() async {
+    SystemNavigator.pop();
+    print('Backpress');
+    return Future.value(false);
+  }
 
-bool _isEmailValid(String email) {
-  return RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email);
+  bool _isEmailValid(String email) {
+    return RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email);
+  }
 }
