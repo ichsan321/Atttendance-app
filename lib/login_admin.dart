@@ -220,52 +220,44 @@ class _MyadminPageState extends State<MyadminPage> {
   void _onLogin() {
     _email = _emcontroller.text;
     _password = _passcontroller.text;
-    //   print('login');
-    //   // Navigator.push(
-    //   //   context,
-    //   //   MaterialPageRoute(builder: (context) => Maincsreen()),
-    //   // );
-    //   if (_isEmailValid(_email) && (_password.length > 4)) {
-    //     ProgressDialog pr = new ProgressDialog(context,
-    //         type: ProgressDialogType.Normal, isDismissible: false);
-    //     pr.style(message: "Login in");
-    //     pr.show();
-    //     http.post(Uri.parse(urlLogin), body: {
-    //       "email": _email,
-    //       "password": _password,
-    //     }).then((res) {
-    //       print(res.statusCode);
-    //       var string = res.body;
-    //       List dres = string.split(",");
-    //       print(dres);
-    //       Toast.show(dres[0], context,
-    //           duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-    //       if (dres[0] == "success") {
-    //         pr.hide();
-    //         // print("Radius:");
-    //         print(dres);
-    //         Admin admin = new Admin(
-    //             name: dres[1], email: dres[2], phone: dres[3], jabatan: dres[4]);
-    //         Navigator.push(
-    //             context,
-    //             MaterialPageRoute(
-    //                 builder: (context) => Mainadmincsreen(admin: admin)));
-    //       } else {
-    //         pr.hide();
-    //       }
-    //     }).catchError((err) {
-    //       pr.hide();
-    //       print(err);
-    //     });
-    //   } else {}
-    //
-    //  var string = res.body;
-    //   List dres = string.split(",");
-    //    Admin admin = new Admin(
-    //             email: dres[1], name: dres[2], phone: dres[3], jabatan: dres[4]);
-    var admin;
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => Mainadmincsreen(admin: admin)));
+    print('login');
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(builder: (context) => Maincsreen()),
+    // );
+    if (_isEmailValid(_email) && (_password.length > 4)) {
+      ProgressDialog pr = new ProgressDialog(context,
+          type: ProgressDialogType.Normal, isDismissible: false);
+      pr.style(message: "Login in");
+      pr.show();
+      http.post(Uri.parse(urlLogin), body: {
+        "email": _email,
+        "password": _password,
+      }).then((res) {
+        print(res.statusCode);
+        var string = res.body;
+        List dres = string.split(",");
+        print(dres);
+        Toast.show(dres[0], context,
+            duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+        if (dres[0] == "success") {
+          pr.hide();
+
+          print(dres);
+          Admin admin = new Admin(
+              name: dres[1], email: dres[2], phone: dres[3], jabatan: dres[4]);
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Mainadmincsreen(admin: admin)));
+        } else {
+          pr.hide();
+        }
+      }).catchError((err) {
+        pr.hide();
+        print(err);
+      });
+    } else {}
   }
 
   void _onRegister() {
