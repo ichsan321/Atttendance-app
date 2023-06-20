@@ -6,8 +6,6 @@ import 'package:my_project/addabsenscreen.dart';
 import 'package:my_project/addcutiscreen.dart';
 import 'package:my_project/admin.dart';
 import 'package:my_project/loginscreen.dart';
-import 'package:my_project/Usermodel.dart';
-import 'package:my_project/api_service.dart';
 import 'package:my_project/user.dart';
 import 'package:geolocator/geolocator.dart';
 

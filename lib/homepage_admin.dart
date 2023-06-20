@@ -6,8 +6,6 @@ import 'package:my_project/addabsenscreen.dart';
 import 'package:my_project/addcutiscreen.dart';
 import 'package:my_project/admin.dart';
 import 'package:my_project/loginscreen.dart';
-import 'package:my_project/Usermodel.dart';
-import 'package:my_project/api_service.dart';
 import 'package:my_project/user.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -70,30 +68,6 @@ class _homepage_adminState extends State<homepage_admin> {
                               Text(widget.admin.jabatan + "  "),
                             ],
                           ),
-                          // child: Text("Welcome   ",
-                          //     style: TextStyle(
-                          //         fontSize: 24,
-                          //         fontWeight: FontWeight.bold,
-                          //         color: Colors.black)),
-                        ),
-                        SizedBox(
-                          height: 20.0,
-                        ),
-                        Center(
-                          child: GestureDetector(
-                            onTap: _takePicture,
-                            child: Container(
-                                width: 50.0,
-                                height: 50.0,
-                                decoration: new BoxDecoration(
-                                  image: new DecorationImage(
-                                      image: AssetImage(
-                                          'asset/image/peopleicon.png'),
-                                      fit: BoxFit.fill),
-                                  shape: BoxShape.circle,
-                                  border: Border.all(color: Colors.black),
-                                )),
-                          ),
                         ),
                         SizedBox(
                           child: Text("      "),
@@ -103,164 +77,6 @@ class _homepage_adminState extends State<homepage_admin> {
                   ),
                 ),
               ],
-            ),
-            SizedBox(
-              height: 50.0,
-            ),
-            Padding(
-              padding: EdgeInsets.all(5.0),
-              child: Container(
-                height: 140,
-                decoration: BoxDecoration(
-                    color: (Color.fromARGB(255, 12, 101, 134)),
-                    borderRadius: BorderRadius.all(Radius.circular(30))),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: 20, top: 5, right: 5, bottom: 5),
-                      child: Row(children: [
-                        Text(
-                          "Overview ",
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
-                        ),
-                      ]),
-                    ),
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      Card(
-                        child: ElevatedButton(
-                          onPressed: _izinscreen,
-                          child: Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Column(
-                              children: [
-                                Text(" IZIN"),
-                                SizedBox(
-                                  height: 20.0,
-                                ),
-                                Text(
-                                  "3",
-                                  style: TextStyle(fontSize: 20),
-                                )
-                              ],
-                            ),
-                            // child: Text(
-                            //   "IZIN : 3",
-                            //   style: TextStyle(fontWeight: FontWeight.bold),
-                            // ),
-                          ),
-                        ),
-                      ),
-                      Card(
-                        child: ElevatedButton(
-                          onPressed: _izinscreen,
-                          child: Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Column(
-                              children: [
-                                Text(" SAKIT"),
-                                SizedBox(
-                                  height: 20.0,
-                                ),
-                                Text(
-                                  "3",
-                                  style: TextStyle(fontSize: 20),
-                                )
-                              ],
-                            ),
-                            // child: Text(
-                            //   "IZIN : 3",
-                            //   style: TextStyle(fontWeight: FontWeight.bold),
-                            // ),
-                          ),
-                        ),
-                      ),
-                      Card(
-                        child: ElevatedButton(
-                          onPressed: _izinscreen,
-                          child: Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Column(
-                              children: [
-                                Text(" CUTI"),
-                                SizedBox(
-                                  height: 20.0,
-                                ),
-                                Text(
-                                  "3",
-                                  style: TextStyle(fontSize: 20),
-                                )
-                              ],
-                            ),
-                            // child: Text(
-                            //   "IZIN : 3",
-                            //   style: TextStyle(fontWeight: FontWeight.bold),
-                            // ),
-                          ),
-                        ),
-                      ),
-                      Card(
-                        child: ElevatedButton(
-                          onPressed: _izinscreen,
-                          child: Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Column(
-                              children: [
-                                Text(" SISA"),
-                                SizedBox(
-                                  height: 20.0,
-                                ),
-                                Text(
-                                  "6",
-                                  style: TextStyle(fontSize: 20),
-                                )
-                              ],
-                            ),
-                            // child: Text(
-                            //   "IZIN : 3",
-                            //   style: TextStyle(fontWeight: FontWeight.bold),
-                            // ),
-                          ),
-                        ),
-                      )
-                    ]),
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 10.0,
-            ),
-            Padding(
-              padding: EdgeInsets.all(12.0),
-              child: Container(
-                color: Colors.white24,
-                child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Icon(Icons.location_on),
-                      Expanded(
-                        child: Text(
-                          _currentAddress,
-                          softWrap: false,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 15.0,
             ),
             Expanded(
               child: Container(
@@ -302,7 +118,7 @@ class _homepage_adminState extends State<homepage_admin> {
                                                 'Absen',
                                               ),
                                               Text(
-                                                'Masuk',
+                                                'Pegawai',
                                               ),
                                             ],
                                           ),
@@ -329,10 +145,10 @@ class _homepage_adminState extends State<homepage_admin> {
                                             height: 15.0,
                                           ),
                                           Text(
-                                            'Apply',
+                                            'Izin',
                                           ),
                                           Text(
-                                            'Izin',
+                                            'Pegawai',
                                           ),
                                         ],
                                       ),
@@ -365,10 +181,10 @@ class _homepage_adminState extends State<homepage_admin> {
                                                 height: 15.0,
                                               ),
                                               Text(
-                                                'Apply  ',
+                                                'Sakit  ',
                                               ),
                                               Text(
-                                                'Sakit',
+                                                'Pegawai',
                                               ),
                                             ],
                                           ),
@@ -395,10 +211,10 @@ class _homepage_adminState extends State<homepage_admin> {
                                             height: 15.0,
                                           ),
                                           Text(
-                                            'Apply',
+                                            'Cuti ',
                                           ),
                                           Text(
-                                            'Cuti',
+                                            'Pegawai ',
                                           ),
                                         ],
                                       ),
@@ -431,10 +247,10 @@ class _homepage_adminState extends State<homepage_admin> {
                                                 height: 15.0,
                                               ),
                                               Text(
-                                                'Absen',
+                                                'Keluar Pegawai',
                                               ),
                                               Text(
-                                                'Keluar',
+                                                'Detail',
                                               ),
                                             ],
                                           ),
