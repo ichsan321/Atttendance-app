@@ -13,9 +13,7 @@ import 'package:my_project/absen.dart';
 
 class Mainadmincsreen extends StatefulWidget {
   final Admin admin;
-  final Izin izin;
-  const Mainadmincsreen({Key? key, required this.admin, required this.izin})
-      : super(key: key);
+  const Mainadmincsreen({Key? key, required this.admin}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -30,10 +28,7 @@ class _MyHomePageAdminState extends State<Mainadmincsreen> {
     super.initState();
     tabs = [
       homepage_admin(admin: widget.admin),
-      izin_admin(
-        admin: widget.admin,
-        izin: widget.izin,
-      ),
+      izin_admin(admin: widget.admin),
       cuti_admin(admin: widget.admin),
       sakit_admin(admin: widget.admin),
     ];

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:my_project/izin_admin.dart';
 import 'package:my_project/loginscreen.dart';
 import 'package:my_project/mainscreen.dart';
 import 'package:my_project/registrationscreen.dart';
@@ -249,9 +250,7 @@ class _MyadminPageState extends State<MyadminPage> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => Mainadmincsreen(
-                        admin: admin,
-                      )));
+                  builder: (context) => Mainadmincsreen(admin: admin)));
         } else {
           pr.hide();
         }
