@@ -249,7 +249,9 @@ class _MyadminPageState extends State<MyadminPage> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => Mainadmincsreen(admin: admin)));
+                  builder: (context) => Mainadmincsreen(
+                        admin: admin,
+                      )));
         } else {
           pr.hide();
         }

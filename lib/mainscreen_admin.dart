@@ -9,10 +9,13 @@ import 'package:my_project/profilescreen.dart';
 import 'package:badges/badges.dart';
 import 'package:my_project/user.dart';
 import 'package:my_project/absen_admin.dart';
+import 'package:my_project/absen.dart';
 
 class Mainadmincsreen extends StatefulWidget {
   final Admin admin;
-  const Mainadmincsreen({Key? key, required this.admin}) : super(key: key);
+  final Izin izin;
+  const Mainadmincsreen({Key? key, required this.admin, required this.izin})
+      : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -27,7 +30,10 @@ class _MyHomePageAdminState extends State<Mainadmincsreen> {
     super.initState();
     tabs = [
       homepage_admin(admin: widget.admin),
-      izin_admin(admin: widget.admin),
+      izin_admin(
+        admin: widget.admin,
+        izin: widget.izin,
+      ),
       cuti_admin(admin: widget.admin),
       sakit_admin(admin: widget.admin),
     ];

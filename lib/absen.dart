@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class absen {
+class Absen {
   String id, email, jam, date, location;
 
-  absen({
+  Absen({
     required this.id,
     required this.email,
     required this.jam,
@@ -12,10 +12,10 @@ class absen {
   });
 }
 
-class izin {
+class Izin {
   String id, email, date, keterangan, verify, approve;
 
-  izin({
+  Izin({
     required this.id,
     required this.email,
     required this.date,
@@ -25,9 +25,9 @@ class izin {
   });
 }
 
-class sakit {
+class Sakit {
   String id, email, date, keterangan, verify, approve;
-  sakit({
+  Sakit({
     required this.id,
     required this.email,
     required this.date,
@@ -37,10 +37,10 @@ class sakit {
   });
 }
 
-class cuti {
+class Cuti {
   String id, email, dateawal, dateakhir, keterangan, verify, approve;
 
-  cuti({
+  Cuti({
     required this.id,
     required this.email,
     required this.dateawal,

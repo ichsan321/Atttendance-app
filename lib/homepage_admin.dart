@@ -115,7 +115,7 @@ class _homepage_adminState extends State<homepage_admin> {
                                                 height: 15.0,
                                               ),
                                               Text(
-                                                'Absen',
+                                                'Cuti',
                                               ),
                                               Text(
                                                 'Pegawai',
@@ -211,76 +211,10 @@ class _homepage_adminState extends State<homepage_admin> {
                                             height: 15.0,
                                           ),
                                           Text(
-                                            'Cuti ',
+                                            'About ',
                                           ),
                                           Text(
-                                            'Pegawai ',
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Column(
-                                  children: [
-                                    Card(
-                                      elevation: 10.0,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
-                                      ),
-                                      child: ElevatedButton(
-                                        onPressed: _absenoutButton,
-                                        child: Padding(
-                                          padding: EdgeInsets.all(25.0),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Icon(Icons.add),
-                                              SizedBox(
-                                                height: 15.0,
-                                              ),
-                                              Text(
-                                                'Keluar Pegawai',
-                                              ),
-                                              Text(
-                                                'Detail',
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Card(
-                                  elevation: 10.0,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                  child: ElevatedButton(
-                                    onPressed: _izinscreen,
-                                    child: Padding(
-                                      padding: EdgeInsets.all(25.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Icon(Icons.add),
-                                          SizedBox(
-                                            height: 15.0,
-                                          ),
-                                          Text(
-                                            'About',
-                                          ),
-                                          Text(
-                                            'App',
+                                            'App  ',
                                           ),
                                         ],
                                       ),
