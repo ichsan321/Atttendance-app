@@ -153,6 +153,7 @@ class _AddIzinState extends State<AddIzin> {
     print("this is izin button");
     print(widget.user.email);
     print(dateinput.text);
+    print(widget.user.name);
     print(keteranganizin.text);
 
     if ((dateinput != null && keteranganizin != null)) {
@@ -162,6 +163,7 @@ class _AddIzinState extends State<AddIzin> {
       pr.show();
       http.post(Uri.parse(urlUpload), body: {
         'email': widget.user.email,
+        'name': widget.user.name,
         'date': (dateinput.text).toString(),
         'keterangan': keteranganizin.text,
       }).then((res) {

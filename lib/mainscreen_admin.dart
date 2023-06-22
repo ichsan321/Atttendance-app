@@ -57,10 +57,6 @@ class _MyHomePageAdminState extends State<Mainadmincsreen> {
             icon: Badge(
               position: BadgePosition.topEnd(),
               child: Icon(Icons.book),
-              // badgeContent: Text(
-              //   "1",
-              //   style: TextStyle(color: Colors.white),
-              // )
             ),
             label: 'Izin',
             backgroundColor: Colors.blue,

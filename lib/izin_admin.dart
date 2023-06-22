@@ -63,7 +63,7 @@ class _izin_adminState extends State<izin_admin> {
                                     height: 20,
                                   ),
                                   Center(
-                                    child: Text("Izin Detail",
+                                    child: Text("Izin Pegawai",
                                         style: TextStyle(
                                             fontSize: 24,
                                             fontWeight: FontWeight.bold,
@@ -126,7 +126,7 @@ class _izin_adminState extends State<izin_admin> {
                             Container(
                               color: Colors.blue,
                               child: Center(
-                                child: Text("Izin List",
+                                child: Text("Izin Pegawai List",
                                     style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
@@ -164,17 +164,23 @@ class _izin_adminState extends State<izin_admin> {
                           child: Padding(
                             padding: const EdgeInsets.all(2.0),
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: <Widget>[
                                 Expanded(
                                   child: Container(
                                     child: Column(
                                       children: <Widget>[
-                                        Text(
-                                          "Izin",
-                                          style: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold),
+                                        SizedBox(
+                                          height: 5.0,
                                         ),
+                                        Text(
+                                            "Name : " +
+                                                data![index]['name']
+                                                    .toString()
+                                                    .toUpperCase(),
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold)),
                                         SizedBox(
                                           height: 5.0,
                                         ),
@@ -196,6 +202,37 @@ class _izin_adminState extends State<izin_admin> {
                                         ),
                                         Text("Approve By : " +
                                             data![index]['aprove']),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  primary: Color.fromARGB(
+                                                      190,
+                                                      83,
+                                                      205,
+                                                      49), // Background color
+                                                  onPrimary: Colors.white,
+                                                ),
+                                                onPressed: onAccepted,
+                                                child: Text("Accepted")),
+                                            SizedBox(
+                                              width: 15,
+                                            ),
+                                            ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  primary: Color.fromARGB(
+                                                      189,
+                                                      223,
+                                                      22,
+                                                      22), // Background color
+                                                  onPrimary: Colors.white,
+                                                ),
+                                                onPressed: onRejected,
+                                                child: Text("Rejected"))
+                                          ],
+                                        )
                                       ],
                                     ),
                                   ),
@@ -271,6 +308,13 @@ class _izin_adminState extends State<izin_admin> {
     //_getCurrentLocation();
   }
 
+  void onAccepted() {
+    print("this is accepted button ");
+  }
+
+  void onRejected() {
+    print("This is rejected button");
+  }
   // void _onIzinAccepted(String id, String date, String keterangan, String approve) {
   //   print("Delete " + keterangan);
   //   _showDialog(id, date);
