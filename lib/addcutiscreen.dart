@@ -194,6 +194,7 @@ class _addcutiState extends State<addcuti> {
   void _Cutibutton() async {
     print("this is izin button");
     print(widget.user.email);
+    print(widget.user.name);
     print(startdateinput.text);
     print(enddateinput.text);
 
@@ -210,6 +211,7 @@ class _addcutiState extends State<addcuti> {
       pr.show();
       http.post(Uri.parse(urlUpload), body: {
         'email': widget.user.email,
+        'name': widget.user.name,
         'dateawal': (startdateinput.text).toString(),
         'dateakhir': (enddateinput.text).toString(),
         'keterangan': cutiinput.text,

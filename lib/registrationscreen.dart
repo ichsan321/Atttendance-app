@@ -393,6 +393,12 @@ class RegisterWidgetState extends State<RegisterWidget> {
 
   void uploadData() {
     print(" The upload button function");
+    print(_namecontroller.text);
+    print(_emcontroller.text);
+    print(_passcontroller.text);
+    print(_phcontroller.text);
+    print(_jabatancontroller.text);
+
     _name = _namecontroller.text;
     _email = _emcontroller.text;
     _password = _passcontroller.text;
@@ -419,9 +425,6 @@ class RegisterWidgetState extends State<RegisterWidget> {
         print(res.body);
         if (res.body == "success") {
           print("Test di bawah succes");
-          Toast.show("Check your registration information", context,
-              duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-
           savepref(_email!, _password!);
           _namecontroller.text = '';
           _emcontroller.text = '';
@@ -429,18 +432,28 @@ class RegisterWidgetState extends State<RegisterWidget> {
           _passcontroller.text = '';
           _jabatancontroller.text = '';
           pr.hide();
+          Toast.show(
+              "Your Registration Is Succesfully, Please check on email from Admin to verification ",
+              context,
+              duration: 3,
+              gravity: Toast.BOTTOM,
+              backgroundColor: Colors.red);
 
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                   builder: (BuildContext context) => LoginPage()));
+        } else if (res.body == "failed") {
+          Toast.show("There is some trouble with connection", context,
+              duration: 3, gravity: Toast.BOTTOM, backgroundColor: Colors.red);
+          pr.hide();
         }
       }).catchError((err) {
         print(err);
       });
     } else {
-      Toast.show("Check your registration information", context,
-          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+      Toast.show("Please Check Your Fill first", context,
+          duration: 3, gravity: Toast.BOTTOM, backgroundColor: Colors.red);
     }
   }
 
