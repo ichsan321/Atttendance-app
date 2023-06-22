@@ -204,6 +204,37 @@ class _cuti_adminState extends State<cuti_admin> {
                                         ),
                                         Text("Approve By : " +
                                             data![index]['approve']),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  primary: Color.fromARGB(
+                                                      190,
+                                                      83,
+                                                      205,
+                                                      49), // Background color
+                                                  onPrimary: Colors.white,
+                                                ),
+                                                onPressed: onAccepted,
+                                                child: Text("Accepted")),
+                                            SizedBox(
+                                              width: 15,
+                                            ),
+                                            ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  primary: Color.fromARGB(
+                                                      189,
+                                                      223,
+                                                      22,
+                                                      22), // Background color
+                                                  onPrimary: Colors.white,
+                                                ),
+                                                onPressed: onRejected,
+                                                child: Text("Rejected"))
+                                          ],
+                                        )
                                       ],
                                     ),
                                   ),
@@ -277,6 +308,14 @@ class _cuti_adminState extends State<cuti_admin> {
   Future init() async {
     this.makeRequest();
     //_getCurrentLocation();
+  }
+
+  void onAccepted() {
+    print("this is accepted button ");
+  }
+
+  void onRejected() {
+    print("This is rejected button");
   }
 
   Future<Null> refreshList() async {
