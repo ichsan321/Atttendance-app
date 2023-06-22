@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:my_project/user.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:my_project/admin.dart';
+import 'package:toast/toast.dart';
 
 double perpage = 1;
 
@@ -215,7 +216,13 @@ class _izin_adminState extends State<izin_admin> {
                                                       49), // Background color
                                                   onPrimary: Colors.white,
                                                 ),
-                                                onPressed: onAccepted,
+                                                onPressed: () => onAccepted(
+                                                    data![index]['id']
+                                                        .toString(),
+                                                    data![index]['name']
+                                                        .toString(),
+                                                    data![index]['date']
+                                                        .toString()),
                                                 child: Text("Accepted")),
                                             SizedBox(
                                               width: 15,
@@ -308,8 +315,67 @@ class _izin_adminState extends State<izin_admin> {
     //_getCurrentLocation();
   }
 
-  void onAccepted() {
+  void onAccepted(String id, String name, String date) {
     print("this is accepted button ");
+    _showDialog(id, name, date);
+  }
+
+  void _showDialog(String id, String name, String date) {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Apakah anda yakin ingin menyetujui cuti  " +
+              name +
+              "pada tanggal " +
+              date),
+          content: new Text("Are your sure?"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new ElevatedButton(
+              child: new Text("Ya"),
+              onPressed: () {
+                Navigator.of(context).pop();
+                AcceptRequest(id);
+              },
+            ),
+            new ElevatedButton(
+              child: new Text("Tidak"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<String?> AcceptRequest(String id) async {
+    String urlLoadJobs =
+        "https://myattendance-test.000webhostapp.com/php/accepted_izin.php";
+    ProgressDialog pr = new ProgressDialog(context,
+        type: ProgressDialogType.Normal, isDismissible: false);
+    pr.style(message: "Accepting Izin");
+    pr.show();
+    http.post(Uri.parse(urlLoadJobs), body: {
+      "id": id,
+    }).then((res) {
+      print(res.body);
+      if (res.body == "success") {
+        Toast.show("Successfully", context, duration: 3, gravity: Toast.CENTER);
+        init();
+      } else {
+        Toast.show("failed", context,
+            duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+      }
+    }).catchError((err) {
+      print(err);
+      pr.hide();
+    });
+    return null;
   }
 
   void onRejected() {
