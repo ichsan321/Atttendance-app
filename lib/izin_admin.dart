@@ -221,6 +221,8 @@ class _izin_adminState extends State<izin_admin> {
                                                         .toString(),
                                                     data![index]['name']
                                                         .toString(),
+                                                    data![index]['email']
+                                                        .toString(),
                                                     data![index]['date']
                                                         .toString()),
                                                 child: Text("Accepted")),
@@ -315,12 +317,12 @@ class _izin_adminState extends State<izin_admin> {
     //_getCurrentLocation();
   }
 
-  void onAccepted(String id, String name, String date) {
+  void onAccepted(String id, String name, String email, String date) {
     print("this is accepted button ");
-    _showDialog(id, name, date);
+    _showDialog(id, name, email, date);
   }
 
-  void _showDialog(String id, String name, String date) {
+  void _showDialog(String id, String name, String email, String date) {
     // flutter defined function
     showDialog(
       context: context,
@@ -329,16 +331,17 @@ class _izin_adminState extends State<izin_admin> {
         return AlertDialog(
           title: new Text("Apakah anda yakin ingin menyetujui cuti  " +
               name +
-              "pada tanggal " +
-              date),
-          content: new Text("Are your sure?"),
+              " pada tanggal " +
+              date +
+              " ?"),
+          // content: new Text("Are your sure?"),
           actions: <Widget>[
             // usually buttons at the bottom of the dialog
             new ElevatedButton(
               child: new Text("Ya"),
               onPressed: () {
                 Navigator.of(context).pop();
-                AcceptRequest(id);
+                AcceptRequest(id, email);
               },
             ),
             new ElevatedButton(
@@ -353,23 +356,25 @@ class _izin_adminState extends State<izin_admin> {
     );
   }
 
-  Future<String?> AcceptRequest(String id) async {
-    String urlLoadJobs =
+  Future<String?> AcceptRequest(String id, email) async {
+    String urlAcceptedIzin =
         "https://myattendance-test.000webhostapp.com/php/accepted_izin.php";
     ProgressDialog pr = new ProgressDialog(context,
         type: ProgressDialogType.Normal, isDismissible: false);
     pr.style(message: "Accepting Izin");
     pr.show();
-    http.post(Uri.parse(urlLoadJobs), body: {
+    http.post(Uri.parse(urlAcceptedIzin), body: {
       "id": id,
+      "email": email,
     }).then((res) {
       print(res.body);
       if (res.body == "success") {
         Toast.show("Successfully", context, duration: 3, gravity: Toast.CENTER);
         init();
-      } else {
-        Toast.show("failed", context,
-            duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+      } else if (res.body == "failed") {
+        Toast.show("There is a problem with with our api ", context,
+            duration: 3, gravity: Toast.BOTTOM);
+        pr.hide();
       }
     }).catchError((err) {
       print(err);
