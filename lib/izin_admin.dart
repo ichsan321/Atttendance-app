@@ -201,8 +201,18 @@ class _izin_adminState extends State<izin_admin> {
                                         SizedBox(
                                           height: 5,
                                         ),
-                                        Text("Approve By : " +
-                                            data![index]['aprove']),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text("Approve By : "),
+                                            Text(
+                                              data![index]['aprove'],
+                                              style: TextStyle(
+                                                  color: Colors.green),
+                                            )
+                                          ],
+                                        ),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.end,
@@ -357,6 +367,8 @@ class _izin_adminState extends State<izin_admin> {
   }
 
   Future<String?> AcceptRequest(String id, email) async {
+    print("id user " + id);
+    print("email user " + email);
     String urlAcceptedIzin =
         "https://myattendance-test.000webhostapp.com/php/accepted_izin.php";
     ProgressDialog pr = new ProgressDialog(context,
@@ -364,8 +376,8 @@ class _izin_adminState extends State<izin_admin> {
     pr.style(message: "Accepting Izin");
     pr.show();
     http.post(Uri.parse(urlAcceptedIzin), body: {
-      "id": id,
-      "email": email,
+      "id": id.toString(),
+      "email": email.toString(),
     }).then((res) {
       print(res.body);
       if (res.body == "success") {
