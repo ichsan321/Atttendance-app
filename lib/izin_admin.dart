@@ -201,18 +201,32 @@ class _izin_adminState extends State<izin_admin> {
                                         SizedBox(
                                           height: 5,
                                         ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text("Approve By : "),
-                                            Text(
-                                              data![index]['aprove'],
-                                              style: TextStyle(
-                                                  color: Colors.green),
-                                            )
-                                          ],
-                                        ),
+                                        (data![index]['index'].toString() ==
+                                                "Administrator")
+                                            ? Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text("Approve By : "),
+                                                  Text(
+                                                    data![index]['aprove'],
+                                                    style: TextStyle(
+                                                        color: Colors.green),
+                                                  )
+                                                ],
+                                              )
+                                            : Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text("Approve By : "),
+                                                  Text(
+                                                    data![index]['aprove'],
+                                                    style: TextStyle(
+                                                        color: Colors.red),
+                                                  )
+                                                ],
+                                              ),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.end,
@@ -248,7 +262,15 @@ class _izin_adminState extends State<izin_admin> {
                                                       22), // Background color
                                                   onPrimary: Colors.white,
                                                 ),
-                                                onPressed: onRejected,
+                                                onPressed: () => onRejected(
+                                                    data![index]['id']
+                                                        .toString(),
+                                                    data![index]['name']
+                                                        .toString(),
+                                                    data![index]['email']
+                                                        .toString(),
+                                                    data![index]['date']
+                                                        .toString()),
                                                 child: Text("Rejected"))
                                           ],
                                         )
@@ -339,7 +361,7 @@ class _izin_adminState extends State<izin_admin> {
       builder: (BuildContext context) {
         // return object of type Dialog
         return AlertDialog(
-          title: new Text("Apakah anda yakin ingin menyetujui cuti  " +
+          title: new Text("Apakah anda yakin ingin menyetujui izin  " +
               name +
               " pada tanggal " +
               date +
@@ -395,9 +417,74 @@ class _izin_adminState extends State<izin_admin> {
     return null;
   }
 
-  void onRejected() {
+  void onRejected(String id, String name, String email, String date) {
     print("This is rejected button");
+    _showDialog1(id, name, email, date);
   }
+
+  void _showDialog1(String id, String name, String email, String date) {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Apakah anda yakin ingin menolak izin  " +
+              name +
+              " pada tanggal " +
+              date +
+              " ?"),
+          // content: new Text("Are your sure?"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new ElevatedButton(
+              child: new Text("Ya"),
+              onPressed: () {
+                Navigator.of(context).pop();
+                AcceptRequest1(id, email);
+              },
+            ),
+            new ElevatedButton(
+              child: new Text("Tidak"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<String?> AcceptRequest1(String id, email) async {
+    print("id user " + id);
+    print("email user " + email);
+    String urlAcceptedIzin =
+        "https://myattendance-test.000webhostapp.com/php/rejected_izin.php";
+    ProgressDialog pr = new ProgressDialog(context,
+        type: ProgressDialogType.Normal, isDismissible: false);
+    pr.style(message: "Rejecting Izin");
+    pr.show();
+    http.post(Uri.parse(urlAcceptedIzin), body: {
+      "id": id.toString(),
+      "email": email.toString(),
+    }).then((res) {
+      print(res.body);
+      if (res.body == "success") {
+        Toast.show("Successfully", context, duration: 3, gravity: Toast.CENTER);
+        init();
+      } else if (res.body == "failed") {
+        Toast.show("There is a problem with with our api ", context,
+            duration: 3, gravity: Toast.BOTTOM);
+        pr.hide();
+      }
+    }).catchError((err) {
+      print(err);
+      pr.hide();
+    });
+    return null;
+  }
+
   // void _onIzinAccepted(String id, String date, String keterangan, String approve) {
   //   print("Delete " + keterangan);
   //   _showDialog(id, date);
