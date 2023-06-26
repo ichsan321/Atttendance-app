@@ -8,6 +8,7 @@ import 'package:my_project/user.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:my_project/admin.dart';
 import 'package:toast/toast.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 double perpage = 1;
 
@@ -156,12 +157,32 @@ class _izin_adminState extends State<izin_admin> {
                       padding: EdgeInsets.all(2.0),
                       child: Card(
                         elevation: 2,
-                        child: InkWell(
-                          // onLongPress: () => _onJobDelete(
+                        child: Slidable(
+                          key: const ValueKey(0),
+
+                          endActionPane: ActionPane(
+                            motion: ScrollMotion(),
+                            dismissible: DismissiblePane(onDismissed: () {}),
+                            children: [
+                              SlidableAction(
+                                flex: 1,
+                                onPressed: (BuildContext context) {
+                                  onIzinDelete(data![index]['id'].toString());
+                                },
+                                backgroundColor:
+                                    Color.fromARGB(255, 184, 30, 30),
+                                foregroundColor: Colors.white,
+                                icon: Icons.delete,
+                                label: 'Delete',
+                              ),
+                            ],
+                          ),
+
+                          // onLongPress: () => _onIzinDelete(
                           //     data![index]['id'].toString(),
                           //     data![index]['date'].toString(),
                           //     data![index]['keterangan'].toString(),
-                          //     data![index]['approve'].toString()),
+                          //     data![index]['aprove'].toString()),
                           child: Padding(
                             padding: const EdgeInsets.all(2.0),
                             child: Row(
@@ -201,7 +222,7 @@ class _izin_adminState extends State<izin_admin> {
                                         SizedBox(
                                           height: 5,
                                         ),
-                                        (data![index]['index'].toString() ==
+                                        (data![index]['aprove'].toString() ==
                                                 "Administrator")
                                             ? Row(
                                                 mainAxisAlignment:
@@ -227,53 +248,75 @@ class _izin_adminState extends State<izin_admin> {
                                                   )
                                                 ],
                                               ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                  primary: Color.fromARGB(
-                                                      190,
-                                                      83,
-                                                      205,
-                                                      49), // Background color
-                                                  onPrimary: Colors.white,
-                                                ),
-                                                onPressed: () => onAccepted(
-                                                    data![index]['id']
-                                                        .toString(),
-                                                    data![index]['name']
-                                                        .toString(),
-                                                    data![index]['email']
-                                                        .toString(),
-                                                    data![index]['date']
-                                                        .toString()),
-                                                child: Text("Accepted")),
-                                            SizedBox(
-                                              width: 15,
-                                            ),
-                                            ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                  primary: Color.fromARGB(
-                                                      189,
-                                                      223,
-                                                      22,
-                                                      22), // Background color
-                                                  onPrimary: Colors.white,
-                                                ),
-                                                onPressed: () => onRejected(
-                                                    data![index]['id']
-                                                        .toString(),
-                                                    data![index]['name']
-                                                        .toString(),
-                                                    data![index]['email']
-                                                        .toString(),
-                                                    data![index]['date']
-                                                        .toString()),
-                                                child: Text("Rejected"))
-                                          ],
-                                        )
+                                        (data![index]['aprove'].length > 0)
+                                            ? Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text("Done",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold)),
+                                                  Icon(Icons.check)
+                                                ],
+                                              )
+                                            : Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.end,
+                                                children: [
+                                                  ElevatedButton(
+                                                      style: ElevatedButton
+                                                          .styleFrom(
+                                                        primary: Color.fromARGB(
+                                                            190,
+                                                            83,
+                                                            205,
+                                                            49), // Background color
+                                                        onPrimary: Colors.white,
+                                                      ),
+                                                      onPressed: () =>
+                                                          onAccepted(
+                                                              data![index]['id']
+                                                                  .toString(),
+                                                              data![index]
+                                                                      ['name']
+                                                                  .toString(),
+                                                              data![index]
+                                                                      ['email']
+                                                                  .toString(),
+                                                              data![index]
+                                                                      ['date']
+                                                                  .toString()),
+                                                      child: Text("Accepted")),
+                                                  SizedBox(
+                                                    width: 15,
+                                                  ),
+                                                  ElevatedButton(
+                                                      style: ElevatedButton
+                                                          .styleFrom(
+                                                        primary: Color.fromARGB(
+                                                            189,
+                                                            223,
+                                                            22,
+                                                            22), // Background color
+                                                        onPrimary: Colors.white,
+                                                      ),
+                                                      onPressed: () =>
+                                                          onRejected(
+                                                              data![index]['id']
+                                                                  .toString(),
+                                                              data![index]
+                                                                      ['name']
+                                                                  .toString(),
+                                                              data![index]
+                                                                      ['email']
+                                                                  .toString(),
+                                                              data![index]
+                                                                      ['date']
+                                                                  .toString()),
+                                                      child: Text("Rejected"))
+                                                ],
+                                              )
                                       ],
                                     ),
                                   ),
@@ -485,64 +528,10 @@ class _izin_adminState extends State<izin_admin> {
     return null;
   }
 
-  // void _onIzinAccepted(String id, String date, String keterangan, String approve) {
-  //   print("Delete " + keterangan);
-  //   _showDialog(id, date);
-  // }
-
-  // void _showDialog(String id, String date) {
-  //   // flutter defined function
-  //   showDialog(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       // return object of type Dialog
-  //       return AlertDialog(
-  //         title: new Text("Delete Izin Tanggal" + date ),
-  //         content: new Text("Are your sure?"),
-  //         actions: <Widget>[
-  //           // usually buttons at the bottom of the dialog
-  //           new ElevatedButton(
-  //             child: new Text("Yes"),
-  //             onPressed: () {
-  //               Navigator.of(context).pop();
-  //               deleteRequest(date);
-  //             },
-  //           ),
-  //           new ElevatedButton(
-  //             child: new Text("No"),
-  //             onPressed: () {
-  //               Navigator.of(context).pop();
-  //             },
-  //           ),
-  //         ],
-  //       );
-  //     },
-  //   );
-  // }
-  // Future<String> deleteRequest(String jobid) async {
-  //   String urlLoadJobs = "https://myattendance-test.000webhostapp.com/php/delete_izin.php";
-  //   ProgressDialog pr = new ProgressDialog(context,
-  //       type: ProgressDialogType.Normal, isDismissible: false);
-  //   pr.style(message: "Deleting Izin");
-  //   pr.show();
-  //   http.post(urlLoadJobs, body: {
-  //     "jobid": jobid,
-  //   }).then((res) {
-  //     print(res.body);
-  //     if (res.body == "success") {
-  //       Toast.show("Success", context,
-  //           duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-  //       init();
-  //     } else {
-  //       Toast.show("Failed", context,
-  //           duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-  //     }
-  //   }).catchError((err) {
-  //     print(err);
-  //     pr.dismiss();
-  //   });
-  //   return null;
-  // }
+  void onIzinDelete(String id) {
+    print("This is delete izin button");
+    print("id user" + id);
+  }
 
   Future<Null> refreshList() async {
     await Future.delayed(Duration(seconds: 2));
