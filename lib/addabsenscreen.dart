@@ -17,7 +17,7 @@ String verify = "1";
 String loc_latitude_wisma = "-6.175019394047249";
 String loc_longitude_wisma = " 106.81996316318025";
 
-String radius = "10";
+String radius = "15000";
 
 class addabsenscreen extends StatefulWidget {
   final User user;
@@ -147,7 +147,7 @@ class _addabsenscreenState extends State<addabsenscreen> {
                           child: InkWell(
                             onTap: (_uploadabsenbutton),
                             child: Center(
-                              child: Text("Absen",
+                              child: Text("ABSEN",
                                   style: TextStyle(
                                       color: Colors.white, // LOGIN Name
                                       fontFamily: "Poppins-Bold",
@@ -255,6 +255,13 @@ class _addabsenscreenState extends State<addabsenscreen> {
               gravity: Toast.BOTTOM,
               backgroundColor: Color.fromARGB(198, 223, 67, 67));
           pr.hide();
+        } else if (res.body == 'failed 4') {
+          Toast.show(
+              "Please take the attendance check out first, before take the attendance",
+              context,
+              duration: 3,
+              gravity: Toast.BOTTOM,
+              backgroundColor: Color.fromARGB(198, 223, 67, 67));
         }
       }).catchError((err) {
         print(err);

@@ -238,6 +238,8 @@ class _AbsenscreenState extends State<Absenscreen> {
   Future<String?> makeRequest() async {
     String urlLoadAbsen =
         "https://myattendance-test.000webhostapp.com/php/load_absen.php";
+    String urlLoadabsenkeluar =
+        "https://myattendance-test.000webhostapp.com/php/load_absenkeluar.php";
     ProgressDialog pr = new ProgressDialog(context,
         type: ProgressDialogType.Normal, isDismissible: false);
     pr.style(message: "Load absen list");

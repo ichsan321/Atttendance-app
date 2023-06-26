@@ -18,6 +18,7 @@ final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
 late Position _currentPosition;
 String _currentAddress = " Searching cureent location";
 List? data;
+String verifykeluar = '1';
 
 final List<String> items = [
   'Wisma BSG',
@@ -204,6 +205,7 @@ class _absenKeluarState extends State<absenKeluar> {
         'date': cdate1,
         'jam': tdata.toString(),
         'keterangan': keterangankeluar.text,
+        'verifykeluar': verifykeluar
       }).then((res) {
         print(res.statusCode);
         print(res.body);
