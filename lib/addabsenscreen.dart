@@ -255,13 +255,14 @@ class _addabsenscreenState extends State<addabsenscreen> {
               gravity: Toast.BOTTOM,
               backgroundColor: Color.fromARGB(198, 223, 67, 67));
           pr.hide();
-        } else if (res.body == 'failed 4') {
+        } else if (res.body == "failed 4") {
           Toast.show(
               "Please take the attendance check out first, before take the attendance",
               context,
               duration: 3,
               gravity: Toast.BOTTOM,
               backgroundColor: Color.fromARGB(198, 223, 67, 67));
+          pr.hide();
         }
       }).catchError((err) {
         print(err);
