@@ -115,9 +115,10 @@ class _absenKeluarState extends State<absenKeluar> {
 
                     TextField(
                       keyboardType: TextInputType.multiline,
+                      maxLines: 3,
                       controller: keterangankeluar,
                       decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.all(50.0),
+                        contentPadding: const EdgeInsets.all(10.0),
                         prefixIcon: Container(
                             padding:
                                 const EdgeInsets.only(top: 80.0, bottom: 16.0),
@@ -202,7 +203,7 @@ class _absenKeluarState extends State<absenKeluar> {
       pr.show();
       http.post(Uri.parse(urlUpload), body: {
         'email': widget.user.email,
-        'date': cdate1,
+        'date': cdate1.toString(),
         'jamkeluar': tdata.toString(),
         'ketkeluar': keterangankeluar.text,
         'verifykeluar': verifykeluar
