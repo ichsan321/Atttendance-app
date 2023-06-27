@@ -236,8 +236,10 @@ class _addabsenscreenState extends State<addabsenscreen> {
         print(res.body);
         if (res.body == "success") {
           print("Test di bawah succes");
-          Toast.show("Check your registration information", context,
-              duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
+          Toast.show("Success", context,
+              duration: 3,
+              gravity: Toast.BOTTOM,
+              backgroundColor: Color(0xff4caf50));
           pr.hide();
           Navigator.pushReplacement(
               context,
@@ -250,19 +252,22 @@ class _addabsenscreenState extends State<addabsenscreen> {
               duration: 3, gravity: Toast.BOTTOM, backgroundColor: Colors.red);
           pr.hide();
         } else if (res.body == "failed 1") {
-          Toast.show("Sorry Your Attendace have been took before", context,
+          Toast.show("Sorry, Your Attendace Have Been Took Before", context,
               duration: 3,
               gravity: Toast.BOTTOM,
               backgroundColor: Color.fromARGB(198, 223, 67, 67));
           pr.hide();
         } else if (res.body == "failed 4") {
-          Toast.show(
-              "Please take the attendance check out first, before take the attendance",
-              context,
+          Toast.show("Please Take Absen Keluar First", context,
               duration: 3,
               gravity: Toast.BOTTOM,
               backgroundColor: Color.fromARGB(198, 223, 67, 67));
           pr.hide();
+        } else if (res.body == 'failed 1') {
+          Toast.show(" There is a problem with connection ", context,
+              duration: 3,
+              gravity: Toast.BOTTOM,
+              backgroundColor: Color(0xfff44336));
         }
       }).catchError((err) {
         print(err);

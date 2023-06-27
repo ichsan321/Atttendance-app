@@ -203,8 +203,8 @@ class _absenKeluarState extends State<absenKeluar> {
       http.post(Uri.parse(urlUpload), body: {
         'email': widget.user.email,
         'date': cdate1,
-        'jam': tdata.toString(),
-        'keterangan': keterangankeluar.text,
+        'jamkeluar': tdata.toString(),
+        'ketkeluar': keterangankeluar.text,
         'verifykeluar': verifykeluar
       }).then((res) {
         print(res.statusCode);
