@@ -355,7 +355,7 @@ class _sakit_adminState extends State<sakit_admin> {
     print("id user " + id);
     print("email user " + email);
     String urlAcceptedIzin =
-        "https://myattendance-test.000webhostapp.com/php/accepted_cuti.php";
+        "https://myattendance-test.000webhostapp.com/php/accepted_sakit.php";
     ProgressDialog pr = new ProgressDialog(context,
         type: ProgressDialogType.Normal, isDismissible: false);
     pr.style(message: "Accepting Izin");

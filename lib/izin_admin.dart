@@ -139,27 +139,28 @@ class _izin_adminState extends State<izin_admin> {
                         ),
                       );
                     }
-                    if (index == data!.length && perpage > 1) {
-                      return Container(
-                        width: 250,
-                        color: Colors.cyan,
-                        child: MaterialButton(
-                          child: Text(
-                            "Load More",
-                            style: TextStyle(color: Colors.black),
-                          ),
-                          onPressed: () {},
-                        ),
-                      );
-                    }
+                    // if (index == data!.length && perpage > 1) {
+                    //   return Container(
+                    //     width: 250,
+                    //     color: Colors.cyan,
+                    //     child: MaterialButton(
+                    //       child: Text(
+                    //         "Load More",
+                    //         style: TextStyle(color: Colors.black),
+                    //       ),
+                    //       onPressed: () {},
+                    //     ),
+                    //   );
+                    // }
                     index -= 1;
-                    return Padding(
+
+                    // if (data![index]['aprove'].toString() == "Administrator"){
+                    return Container(
                       padding: EdgeInsets.all(2.0),
                       child: Card(
                         elevation: 2,
                         child: Slidable(
                           key: const ValueKey(0),
-
                           endActionPane: ActionPane(
                             motion: ScrollMotion(),
                             dismissible: DismissiblePane(onDismissed: () {}),

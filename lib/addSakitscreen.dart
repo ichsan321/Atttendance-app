@@ -167,6 +167,7 @@ class _addSakitState extends State<addSakit> {
       pr.show();
       http.post(Uri.parse(urlUpload1), body: {
         'email': widget.user.email,
+        'name': widget.user.name,
         'date': (dateinput.text).toString(),
         'keterangan': sakitinput.text,
       }).then((res) {
