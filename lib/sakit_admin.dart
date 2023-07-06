@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:my_project/user.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:my_project/admin.dart';
+import 'package:toast/toast.dart';
 
 double perpage = 1;
 
@@ -215,7 +216,16 @@ class _sakit_adminState extends State<sakit_admin> {
                                                       49), // Background color
                                                   onPrimary: Colors.white,
                                                 ),
-                                                onPressed: onAccepted,
+                                                onPressed: () => onAccepted(
+                                                      data![index]['id']
+                                                          .toString(),
+                                                      data![index]['name']
+                                                          .toString(),
+                                                      data![index]['email']
+                                                          .toString(),
+                                                      data![index]['date']
+                                                          .toString(),
+                                                    ),
                                                 child: Text("Accepted")),
                                             SizedBox(
                                               width: 15,
@@ -308,8 +318,66 @@ class _sakit_adminState extends State<sakit_admin> {
     //_getCurrentLocation();
   }
 
-  void onAccepted() {
+  void onAccepted(String id, String name, String email, String date) {
     print("this is accepted button ");
+    _showDialog(id, name, email, date);
+  }
+
+  _showDialog(String id, String name, String email, String date) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Apakah anda yakin ingin menyetujui sakit " +
+                name +
+                "pada tanggal " +
+                date),
+            actions: <Widget>[
+              ElevatedButton(
+                child: Text("Ya"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  AcceptRequest(id, email);
+                },
+              ),
+              new ElevatedButton(
+                child: new Text("Tidak"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        });
+  }
+
+  Future<String?> AcceptRequest(String id, email) async {
+    print("id user " + id);
+    print("email user " + email);
+    String urlAcceptedIzin =
+        "https://myattendance-test.000webhostapp.com/php/accepted_cuti.php";
+    ProgressDialog pr = new ProgressDialog(context,
+        type: ProgressDialogType.Normal, isDismissible: false);
+    pr.style(message: "Accepting Izin");
+    pr.show();
+    http.post(Uri.parse(urlAcceptedIzin), body: {
+      "id": id.toString(),
+      "email": email.toString(),
+    }).then((res) {
+      print(res.body);
+      if (res.body == "success") {
+        Toast.show("Successfully", context, duration: 3, gravity: Toast.CENTER);
+        init();
+      } else if (res.body == "failed") {
+        Toast.show("There is a problem with with our api ", context,
+            duration: 3, gravity: Toast.BOTTOM);
+        pr.hide();
+      }
+    }).catchError((err) {
+      print(err);
+      pr.hide();
+    });
+    return null;
   }
 
   void onRejected() {
