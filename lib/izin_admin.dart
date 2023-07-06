@@ -365,7 +365,7 @@ class _izin_adminState extends State<izin_admin> {
 
   Future<String?> makeRequest() async {
     String urlLoadIzin =
-        "https://myattendance-test.000webhostapp.com/php/load_izin.php";
+        "https://myattendance-test.000webhostapp.com/php/load_izinadmin.php";
     ProgressDialog pr = new ProgressDialog(context,
         type: ProgressDialogType.Normal, isDismissible: false);
     pr.style(message: "Load izin list");

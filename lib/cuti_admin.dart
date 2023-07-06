@@ -294,7 +294,7 @@ class _cuti_adminState extends State<cuti_admin> {
 
   Future<String?> makeRequest() async {
     String urlLoadIzin =
-        "https://myattendance-test.000webhostapp.com/php/load_cuti.php";
+        "https://myattendance-test.000webhostapp.com/php/load_cutiadmin.php";
     ProgressDialog pr = new ProgressDialog(context,
         type: ProgressDialogType.Normal, isDismissible: false);
     pr.style(message: "Load Cuti list");

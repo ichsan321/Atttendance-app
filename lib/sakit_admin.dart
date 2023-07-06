@@ -290,7 +290,7 @@ class _sakit_adminState extends State<sakit_admin> {
 
   Future<String?> makeRequest() async {
     String urlLoadIzin =
-        "https://myattendance-test.000webhostapp.com/php/load_sakit.php";
+        "https://myattendance-test.000webhostapp.com/php/load_sakitadmin.php";
     ProgressDialog pr = new ProgressDialog(context,
         type: ProgressDialogType.Normal, isDismissible: false);
     pr.style(message: "Load sakit list");
