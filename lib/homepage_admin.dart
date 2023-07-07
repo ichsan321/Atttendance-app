@@ -40,7 +40,7 @@ class _homepage_adminState extends State<homepage_admin> {
     return Scaffold(
       body: Center(
         child: Column(
-          children: <Widget>[
+          children: [
             Stack(
               children: <Widget>[
                 Padding(
@@ -105,7 +105,8 @@ class _homepage_adminState extends State<homepage_admin> {
                                       child: ElevatedButton(
                                         onPressed: _absenbutton,
                                         child: Padding(
-                                          padding: EdgeInsets.all(25.0),
+                                          padding: EdgeInsets.fromLTRB(
+                                              10, 15, 15, 15),
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -115,10 +116,10 @@ class _homepage_adminState extends State<homepage_admin> {
                                                 height: 15.0,
                                               ),
                                               Text(
-                                                'Cuti',
+                                                'Cuti Pegawai',
                                               ),
                                               Text(
-                                                'Pegawai',
+                                                'Details',
                                               ),
                                             ],
                                           ),
@@ -135,7 +136,8 @@ class _homepage_adminState extends State<homepage_admin> {
                                   child: ElevatedButton(
                                     onPressed: _izinscreen,
                                     child: Padding(
-                                      padding: EdgeInsets.all(25.0),
+                                      padding:
+                                          EdgeInsets.fromLTRB(10, 15, 15, 15),
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -145,10 +147,10 @@ class _homepage_adminState extends State<homepage_admin> {
                                             height: 15.0,
                                           ),
                                           Text(
-                                            'Izin',
+                                            'Izin Pegawai',
                                           ),
                                           Text(
-                                            'Pegawai',
+                                            'Details',
                                           ),
                                         ],
                                       ),
@@ -171,7 +173,8 @@ class _homepage_adminState extends State<homepage_admin> {
                                       child: ElevatedButton(
                                         onPressed: _sakitscreen,
                                         child: Padding(
-                                          padding: EdgeInsets.all(25.0),
+                                          padding: EdgeInsets.fromLTRB(
+                                              10, 15, 10, 15),
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -181,10 +184,10 @@ class _homepage_adminState extends State<homepage_admin> {
                                                 height: 15.0,
                                               ),
                                               Text(
-                                                'Sakit  ',
+                                                'Sakit Pegawai',
                                               ),
                                               Text(
-                                                'Pegawai',
+                                                'Details',
                                               ),
                                             ],
                                           ),
@@ -201,7 +204,8 @@ class _homepage_adminState extends State<homepage_admin> {
                                   child: ElevatedButton(
                                     onPressed: _cutiscreen,
                                     child: Padding(
-                                      padding: EdgeInsets.all(25.0),
+                                      padding:
+                                          EdgeInsets.fromLTRB(50, 15, 15, 15),
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -268,7 +272,31 @@ class _homepage_adminState extends State<homepage_admin> {
                   ),
                 ),
               )),
-            )
+            ),
+            Stack(children: [
+              Padding(
+                padding:
+                    EdgeInsets.only(left: 25, right: 10, top: 10, bottom: 300),
+                child: Stack(children: [
+                  Row(
+                    children: [
+                      Text(
+                        "List .",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        "Absen Pegawai Hari ini",
+                        style: TextStyle(fontSize: 12),
+                      )
+                    ],
+                  ),
+                ]),
+              )
+            ])
           ],
         ),
       ),
