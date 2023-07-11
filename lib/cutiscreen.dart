@@ -161,48 +161,71 @@ class _cutiscreenState extends State<cutiscreen> {
                               children: <Widget>[
                                 Expanded(
                                   child: Container(
-                                    child: Column(
-                                      children: <Widget>[
-                                        Text(
-                                          "Cuti",
+                                    child: Column(children: <Widget>[
+                                      Text(
+                                        "Cuti",
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(
+                                        height: 5.0,
+                                      ),
+                                      Text(
+                                          "Date : " +
+                                              data![index]['dateawal']
+                                                  .toString()
+                                                  .toUpperCase(),
                                           style: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        SizedBox(
-                                          height: 5.0,
-                                        ),
-                                        Text(
-                                            "Date : " +
-                                                data![index]['dateawal']
-                                                    .toString()
-                                                    .toUpperCase(),
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold)),
-                                        SizedBox(
-                                          height: 5.0,
-                                        ),
-                                        Text(
-                                            "Date : " +
-                                                data![index]['dateakhir']
-                                                    .toString()
-                                                    .toUpperCase(),
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold)),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                        Text("Keterangan : " +
-                                            data![index]['keterangan']),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                        Text("Approve By : " +
-                                            data![index]['approve']),
-                                      ],
-                                    ),
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold)),
+                                      SizedBox(
+                                        height: 5.0,
+                                      ),
+                                      Text(
+                                          "Date : " +
+                                              data![index]['dateakhir']
+                                                  .toString()
+                                                  .toUpperCase(),
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold)),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Text("Keterangan : " +
+                                          data![index]['keterangan']),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      (data![index]['approve'].toString() ==
+                                              "Administrator")
+                                          ? Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                  Text("Approve By : "),
+                                                  Text(
+                                                    data![index]['approve']
+                                                        .toString(),
+                                                    style: TextStyle(
+                                                        color: Colors.green),
+                                                  )
+                                                ])
+                                          : Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text("Approve by :"),
+                                                Text(
+                                                  data![index]['approve']
+                                                      .toString(),
+                                                  style: TextStyle(
+                                                      color: Colors.red),
+                                                )
+                                              ],
+                                            )
+                                    ]),
                                   ),
                                 ),
                               ],

@@ -189,8 +189,29 @@ class _sakitscreenState extends State<sakitscreen> {
                                         SizedBox(
                                           height: 5,
                                         ),
-                                        Text("Approve By : " +
-                                            data![index]['Approve']),
+                                        (data![index]['Approve'].toString() ==
+                                                "Administrator")
+                                            ? Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                    Text("Approve By : " +
+                                                        data![index]
+                                                            ['Approve']),
+                                                  ])
+                                            : Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text("Approve By : "),
+                                                  Text(
+                                                    data![index]['Approve']
+                                                        .toString(),
+                                                    style: TextStyle(
+                                                        color: Colors.red[100]),
+                                                  )
+                                                ],
+                                              )
                                       ],
                                     ),
                                   ),

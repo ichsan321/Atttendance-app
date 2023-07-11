@@ -193,8 +193,31 @@ class _izinscreenState extends State<izinscreen> {
                                         SizedBox(
                                           height: 5,
                                         ),
-                                        Text("Approve By : " +
-                                            data![index]['aprove']),
+                                        (data![index]['aprove'].toString() ==
+                                                "Administrator")
+                                            ? Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text("Approve By : "),
+                                                  Text(
+                                                    data![index]['aprove'],
+                                                    style: TextStyle(
+                                                        color: Colors.green),
+                                                  )
+                                                ],
+                                              )
+                                            : Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                    Text(
+                                                      "Approve By : ",
+                                                    ),
+                                                    Text(data![index]['aprove'],
+                                                        style: TextStyle(
+                                                            color: Colors.red))
+                                                  ])
                                       ],
                                     ),
                                   ),

@@ -196,7 +196,7 @@ class _absenKeluarState extends State<absenKeluar> {
     print(cdate1);
     print(tdata);
 
-    if ((keterangankeluar != null)) {
+    if ((keterangankeluar.text.length > 5)) {
       ProgressDialog pr = new ProgressDialog(context,
           type: ProgressDialogType.Normal, isDismissible: false);
       pr.style(message: "in progress");
@@ -229,7 +229,7 @@ class _absenKeluarState extends State<absenKeluar> {
         print(err);
       });
     } else {
-      Toast.show(" Please input the column", context,
+      Toast.show(" Please fill keterangan first", context,
           duration: 3, gravity: Toast.BOTTOM);
     }
   }
