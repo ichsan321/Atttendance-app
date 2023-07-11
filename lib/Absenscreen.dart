@@ -150,13 +150,15 @@ class _AbsenscreenState extends State<Absenscreen> {
                               children: <Widget>[
                                 Expanded(
                                   child: Container(
+                                    color: Colors.grey[300],
                                     child: Column(
                                       children: <Widget>[
                                         Text(
                                           "Masuk",
                                           style: TextStyle(
                                               fontSize: 18,
-                                              fontWeight: FontWeight.bold),
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.green[800]),
                                         ),
                                         SizedBox(
                                           height: 5.0,
@@ -178,6 +180,26 @@ class _AbsenscreenState extends State<Absenscreen> {
                                         ),
                                         Text("Location : " +
                                             data![index]['location']),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text(
+                                          "Keluar",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18,
+                                              color: Colors.red[800]),
+                                        ),
+                                        Text(
+                                          "Jam : " +
+                                              data![index]["jamkeluar"]
+                                                  .toString(),
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        Text("Keterangan : " +
+                                            data![index]['ketkeluar']
+                                                .toString()),
                                       ],
                                     ),
                                   ),

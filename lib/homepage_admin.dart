@@ -120,7 +120,7 @@ class _homepage_adminState extends State<homepage_admin> {
                                     borderRadius: BorderRadius.circular(20.0),
                                   ),
                                   child: ElevatedButton(
-                                    onPressed: _absenbutton,
+                                    onPressed: _cutibutton,
                                     child: Padding(
                                       padding:
                                           EdgeInsets.fromLTRB(10, 15, 15, 15),
@@ -136,7 +136,7 @@ class _homepage_adminState extends State<homepage_admin> {
                                             'Cuti Pegawai',
                                           ),
                                           Text(
-                                            'Details',
+                                            'History',
                                           ),
                                         ],
                                       ),
@@ -149,7 +149,7 @@ class _homepage_adminState extends State<homepage_admin> {
                                     borderRadius: BorderRadius.circular(20.0),
                                   ),
                                   child: ElevatedButton(
-                                    onPressed: _absenbutton,
+                                    onPressed: _izinbutton,
                                     child: Padding(
                                       padding:
                                           EdgeInsets.fromLTRB(10, 15, 15, 15),
@@ -165,7 +165,7 @@ class _homepage_adminState extends State<homepage_admin> {
                                             'Izin Pegawai',
                                           ),
                                           Text(
-                                            'Details',
+                                            'History',
                                           ),
                                         ],
                                       ),
@@ -183,7 +183,7 @@ class _homepage_adminState extends State<homepage_admin> {
                                     borderRadius: BorderRadius.circular(20.0),
                                   ),
                                   child: ElevatedButton(
-                                    onPressed: _absenbutton,
+                                    onPressed: _sakitbutton,
                                     child: Padding(
                                       padding:
                                           EdgeInsets.fromLTRB(10, 15, 10, 15),
@@ -199,7 +199,7 @@ class _homepage_adminState extends State<homepage_admin> {
                                             'Sakit Pegawai',
                                           ),
                                           Text(
-                                            'Details',
+                                            'History',
                                           ),
                                         ],
                                       ),
@@ -493,13 +493,17 @@ class _homepage_adminState extends State<homepage_admin> {
     );
   }
 
-  void _izinscreen() async {}
-
-  void _sakitscreen() async {
-    print("sakitform");
+  void _izinbutton() async {
+    print("izin button");
   }
 
-  void _cutiscreen() async {}
+  void _sakitbutton() async {
+    print("sakit button");
+  }
+
+  void _cutibutton() async {
+    print("cuti button");
+  }
 
   void _absenbutton() async {}
 

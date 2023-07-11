@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:my_project/loginscreen.dart';
 import 'package:toast/toast.dart';
+import 'dart:io';
 
-void main() => runApp(new MyApp());
+void main() {
+  HttpOverrides.global = MyHttpOverrides();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -81,6 +85,15 @@ class _ProgressIndicatorState extends State<ProgressIndicator>
         child: new Container(
       child: CircularProgressIndicator(),
     ));
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }
 
