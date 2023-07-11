@@ -221,6 +221,7 @@ class _addabsenscreenState extends State<addabsenscreen> {
       pr.style(message: "in progress");
       pr.show();
       http.post(Uri.parse(urlUpload), body: {
+        'name': widget.user.name,
         'email': widget.user.email,
         'location': selectedValue,
         'jam': tdata.toString(),
@@ -263,7 +264,7 @@ class _addabsenscreenState extends State<addabsenscreen> {
               gravity: Toast.BOTTOM,
               backgroundColor: Color.fromARGB(198, 223, 67, 67));
           pr.hide();
-        } else if (res.body == 'failed 1') {
+        } else if (res.body == 'failed 3') {
           Toast.show(" There is a problem with connection ", context,
               duration: 3,
               gravity: Toast.BOTTOM,

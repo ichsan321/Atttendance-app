@@ -63,7 +63,7 @@ class _AbsenscreenState extends State<Absenscreen> {
                                     height: 20,
                                   ),
                                   Center(
-                                    child: Text("Absen Detail",
+                                    child: Text("Absen Details",
                                         style: TextStyle(
                                             fontSize: 24,
                                             fontWeight: FontWeight.bold,
@@ -137,19 +137,7 @@ class _AbsenscreenState extends State<Absenscreen> {
                         ),
                       );
                     }
-                    if (index == data!.length && perpage > 1) {
-                      return Container(
-                        width: 250,
-                        color: Colors.cyan,
-                        child: MaterialButton(
-                          child: Text(
-                            "Load More",
-                            style: TextStyle(color: Colors.black),
-                          ),
-                          onPressed: () {},
-                        ),
-                      );
-                    }
+
                     index -= 1;
                     return Padding(
                       padding: EdgeInsets.all(2.0),
@@ -238,8 +226,6 @@ class _AbsenscreenState extends State<Absenscreen> {
   Future<String?> makeRequest() async {
     String urlLoadAbsen =
         "https://myattendance-test.000webhostapp.com/php/load_absen.php";
-    String urlLoadabsenkeluar =
-        "https://myattendance-test.000webhostapp.com/php/load_absenkeluar.php";
     ProgressDialog pr = new ProgressDialog(context,
         type: ProgressDialogType.Normal, isDismissible: false);
     pr.style(message: "Load absen list");

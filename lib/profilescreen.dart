@@ -68,11 +68,6 @@ class _profilescreenState extends State<profilescreen> {
                               Text(widget.user.jabatan + "  "),
                             ],
                           ),
-                          // child: Text("Welcome   ",
-                          //     style: TextStyle(
-                          //         fontSize: 24,
-                          //         fontWeight: FontWeight.bold,
-                          //         color: Colors.black)),
                         ),
                         SizedBox(
                           height: 20.0,
