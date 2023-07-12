@@ -330,7 +330,7 @@ class _sakit_adminState extends State<sakit_admin> {
           return AlertDialog(
             title: Text("Apakah anda yakin ingin menyetujui sakit " +
                 name +
-                "pada tanggal " +
+                " pada tanggal " +
                 date),
             actions: <Widget>[
               ElevatedButton(
@@ -363,6 +363,7 @@ class _sakit_adminState extends State<sakit_admin> {
     http.post(Uri.parse(urlAcceptedIzin), body: {
       "id": id.toString(),
       "email": email.toString(),
+      "totalsakit": 1.toString(),
     }).then((res) {
       print(res.body);
       if (res.body == "success") {

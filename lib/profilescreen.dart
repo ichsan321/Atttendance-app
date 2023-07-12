@@ -138,7 +138,7 @@ class _profilescreenState extends State<profilescreen> {
                                   height: 20.0,
                                 ),
                                 Text(
-                                  "3",
+                                  widget.user.totalizin,
                                   style: TextStyle(fontSize: 20),
                                 )
                               ],
@@ -162,7 +162,7 @@ class _profilescreenState extends State<profilescreen> {
                                   height: 20.0,
                                 ),
                                 Text(
-                                  "3",
+                                  widget.user.totalsakit,
                                   style: TextStyle(fontSize: 20),
                                 )
                               ],
@@ -186,7 +186,7 @@ class _profilescreenState extends State<profilescreen> {
                                   height: 20.0,
                                 ),
                                 Text(
-                                  "3",
+                                  widget.user.totalcuti,
                                   style: TextStyle(fontSize: 20),
                                 )
                               ],
@@ -210,7 +210,7 @@ class _profilescreenState extends State<profilescreen> {
                                   height: 20.0,
                                 ),
                                 Text(
-                                  "6",
+                                  widget.user.sisa,
                                   style: TextStyle(fontSize: 20),
                                 )
                               ],

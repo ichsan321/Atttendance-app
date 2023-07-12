@@ -275,19 +275,18 @@ class _izin_adminState extends State<izin_admin> {
                                                             49), // Background color
                                                         onPrimary: Colors.white,
                                                       ),
-                                                      onPressed: () =>
-                                                          onAccepted(
-                                                              data![index]['id']
-                                                                  .toString(),
-                                                              data![index]
-                                                                      ['name']
-                                                                  .toString(),
-                                                              data![index]
-                                                                      ['email']
-                                                                  .toString(),
-                                                              data![index]
-                                                                      ['date']
-                                                                  .toString()),
+                                                      onPressed: () => onAccepted(
+                                                          data![index]['id']
+                                                              .toString(),
+                                                          data![index]['name']
+                                                              .toString(),
+                                                          data![index]['email']
+                                                              .toString(),
+                                                          data![index]['date']
+                                                              .toString(),
+                                                          data![index]
+                                                                  ['totalizin']
+                                                              .toString()),
                                                       child: Text("Accepted")),
                                                   SizedBox(
                                                     width: 15,
@@ -393,12 +392,14 @@ class _izin_adminState extends State<izin_admin> {
     //_getCurrentLocation();
   }
 
-  void onAccepted(String id, String name, String email, String date) {
+  void onAccepted(
+      String id, String name, String email, String date, String totalizin) {
     print("this is accepted button ");
-    _showDialog(id, name, email, date);
+    _showDialog(id, name, email, date, totalizin);
   }
 
-  void _showDialog(String id, String name, String email, String date) {
+  void _showDialog(
+      String id, String name, String email, String date, String totalizin) {
     // flutter defined function
     showDialog(
       context: context,
@@ -417,7 +418,7 @@ class _izin_adminState extends State<izin_admin> {
               child: new Text("Ya"),
               onPressed: () {
                 Navigator.of(context).pop();
-                AcceptRequest(id, email);
+                AcceptRequest(id, email, totalizin);
               },
             ),
             new ElevatedButton(
@@ -432,7 +433,7 @@ class _izin_adminState extends State<izin_admin> {
     );
   }
 
-  Future<String?> AcceptRequest(String id, email) async {
+  Future<String?> AcceptRequest(String id, email, totalizin) async {
     print("id user " + id);
     print("email user " + email);
     String urlAcceptedIzin =
@@ -444,6 +445,7 @@ class _izin_adminState extends State<izin_admin> {
     http.post(Uri.parse(urlAcceptedIzin), body: {
       "id": id.toString(),
       "email": email.toString(),
+      "totalizin": 1.toString(),
     }).then((res) {
       print(res.body);
       if (res.body == "success") {

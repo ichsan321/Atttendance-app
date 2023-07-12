@@ -244,7 +244,14 @@ class _LoginPageState extends State<LoginPage> {
           // print("Radius:");
           print(dres);
           User user = new User(
-              name: dres[1], email: dres[2], phone: dres[3], jabatan: dres[4]);
+              name: dres[1],
+              email: dres[2],
+              phone: dres[3],
+              jabatan: dres[4],
+              totalsakit: dres[5],
+              totalcuti: dres[6],
+              totalizin: dres[7],
+              sisa: dres[8]);
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => Maincsreen(user: user)));
         } else {

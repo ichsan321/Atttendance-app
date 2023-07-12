@@ -229,6 +229,8 @@ class _cuti_adminState extends State<cuti_admin> {
                                                           .toString(),
                                                       data![index]['dateakhir']
                                                           .toString(),
+                                                      data![index]['totalcuti']
+                                                          .toString(),
                                                     ),
                                                 child: Text("Accepted")),
                                             SizedBox(
@@ -322,14 +324,14 @@ class _cuti_adminState extends State<cuti_admin> {
     //_getCurrentLocation();
   }
 
-  void onAccepted(
-      String id, String name, String email, String dateawal, String dateakhir) {
+  void onAccepted(String id, String name, String email, String dateawal,
+      String dateakhir, String totalcuti) {
     print("this is accepted button ");
-    _showDialog(id, name, email, dateawal, dateakhir);
+    _showDialog(id, name, email, dateawal, dateakhir, totalcuti);
   }
 
-  _showDialog(
-      String id, String name, String email, String dateawal, String dateakhir) {
+  _showDialog(String id, String name, String email, String dateawal,
+      String dateakhir, String totalcuti) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -346,7 +348,7 @@ class _cuti_adminState extends State<cuti_admin> {
                 child: new Text("Ya"),
                 onPressed: () {
                   Navigator.of(context).pop();
-                  AcceptRequest(id, email);
+                  AcceptRequest(id, email, totalcuti);
                 },
               ),
               new ElevatedButton(
@@ -360,7 +362,7 @@ class _cuti_adminState extends State<cuti_admin> {
         });
   }
 
-  Future<String?> AcceptRequest(String id, email) async {
+  Future<String?> AcceptRequest(String id, email, totalcuti) async {
     print("id user " + id);
     print("email user " + email);
     String urlAcceptedIzin =
@@ -372,6 +374,7 @@ class _cuti_adminState extends State<cuti_admin> {
     http.post(Uri.parse(urlAcceptedIzin), body: {
       "id": id.toString(),
       "email": email.toString(),
+      "totalcuti": totalcuti.toString(),
     }).then((res) {
       print(res.body);
       if (res.body == "success") {
