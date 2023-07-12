@@ -195,9 +195,12 @@ class _sakitscreenState extends State<sakitscreen> {
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 children: [
-                                                    Text("Approve By : " +
-                                                        data![index]
-                                                            ['Approve']),
+                                                    Text("Approve By : "),
+                                                    Text(
+                                                      data![index]['Approve'],
+                                                      style: TextStyle(
+                                                          color: Colors.green),
+                                                    )
                                                   ])
                                             : Row(
                                                 mainAxisAlignment:

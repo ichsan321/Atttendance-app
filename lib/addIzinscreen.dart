@@ -156,7 +156,7 @@ class _AddIzinState extends State<AddIzin> {
     print(widget.user.name);
     print(keteranganizin.text);
 
-    if ((dateinput != null && keteranganizin != null)) {
+    if ((dateinput.text.length > 5 && keteranganizin.text.length > 5)) {
       ProgressDialog pr = new ProgressDialog(context,
           type: ProgressDialogType.Normal, isDismissible: false);
       pr.style(message: "in progress");
@@ -188,7 +188,7 @@ class _AddIzinState extends State<AddIzin> {
         print(err);
       });
     } else {
-      Toast.show(" Please input the column", context,
+      Toast.show(" Please fill the input", context,
           duration: 3, gravity: Toast.BOTTOM);
     }
   }
