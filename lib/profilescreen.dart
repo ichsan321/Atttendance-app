@@ -5,7 +5,10 @@ import 'package:my_project/addSakitscreen.dart';
 import 'package:my_project/addabsenscreen.dart';
 import 'package:my_project/addcutiscreen.dart';
 import 'package:my_project/admin.dart';
+import 'package:my_project/cutiuser_overview.dart';
+import 'package:my_project/izinuser_overview.dart';
 import 'package:my_project/loginscreen.dart';
+import 'package:my_project/sakituser_overview.dart';
 import 'package:my_project/user.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -128,7 +131,7 @@ class _profilescreenState extends State<profilescreen> {
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       Card(
                         child: ElevatedButton(
-                          onPressed: _izinscreen,
+                          onPressed: _izinoverview,
                           child: Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Column(
@@ -152,7 +155,7 @@ class _profilescreenState extends State<profilescreen> {
                       ),
                       Card(
                         child: ElevatedButton(
-                          onPressed: _izinscreen,
+                          onPressed: _sakitoverview,
                           child: Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Column(
@@ -176,7 +179,7 @@ class _profilescreenState extends State<profilescreen> {
                       ),
                       Card(
                         child: ElevatedButton(
-                          onPressed: _izinscreen,
+                          onPressed: _cutioverview,
                           child: Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Column(
@@ -631,5 +634,26 @@ class _profilescreenState extends State<profilescreen> {
             builder: (context) => absenKeluar(
                   user: widget.user,
                 )));
+  }
+
+  void _izinoverview() async {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => izinuseroverview(user: widget.user)));
+  }
+
+  void _sakitoverview() async {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => sakituseroverview(user: widget.user)));
+  }
+
+  void _cutioverview() async {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => cutiuseroverview(user: widget.user)));
   }
 }

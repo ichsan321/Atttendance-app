@@ -4,21 +4,21 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter/services.dart';
-import 'package:my_project/admin.dart';
+import 'package:my_project/user.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
 double perpage = 1;
 
-class sakitpegawaiadmin extends StatefulWidget {
-  final Admin admin;
+class izinuseroverview extends StatefulWidget {
+  final User user;
 
-  sakitpegawaiadmin({Key? key, required this.admin});
+  izinuseroverview({Key? key, required this.user});
 
   @override
   _cutipegawaiadminState createState() => _cutipegawaiadminState();
 }
 
-class _cutipegawaiadminState extends State<sakitpegawaiadmin> {
+class _cutipegawaiadminState extends State<izinuseroverview> {
   late GlobalKey<RefreshIndicatorState> refreshKey;
 
   final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
@@ -61,7 +61,7 @@ class _cutipegawaiadminState extends State<sakitpegawaiadmin> {
                                   height: 20,
                                 ),
                                 Center(
-                                  child: Text("Sakit Pegawai History",
+                                  child: Text("Izin Details",
                                       style: TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold,
@@ -75,7 +75,7 @@ class _cutipegawaiadminState extends State<sakitpegawaiadmin> {
                       ),
                     ),
                     leading: new IconButton(
-                      icon: new Icon(Icons.arrow_back_ios, color: Colors.grey),
+                      icon: new Icon(Icons.arrow_back_ios, color: Colors.white),
                       onPressed: () => Navigator.pop(context),
                     ),
                     //You can make this transparent
@@ -133,7 +133,7 @@ class _cutipegawaiadminState extends State<sakitpegawaiadmin> {
                                   SizedBox(
                                     height: 5,
                                   ),
-                                  (data![index]['Approve'].toString() ==
+                                  (data![index]['aprove'].toString() ==
                                           "Administrator")
                                       ? Row(
                                           mainAxisAlignment:
@@ -141,7 +141,7 @@ class _cutipegawaiadminState extends State<sakitpegawaiadmin> {
                                           children: [
                                               Text("Approve By : "),
                                               Text(
-                                                data![index]['Approve']
+                                                data![index]['aprove']
                                                     .toString(),
                                                 style: TextStyle(
                                                     color: Colors.green),
@@ -153,8 +153,7 @@ class _cutipegawaiadminState extends State<sakitpegawaiadmin> {
                                           children: [
                                             Text("Approve by :"),
                                             Text(
-                                              data![index]['Approve']
-                                                  .toString(),
+                                              data![index]['aprove'].toString(),
                                               style:
                                                   TextStyle(color: Colors.red),
                                             )
@@ -206,15 +205,17 @@ class _cutipegawaiadminState extends State<sakitpegawaiadmin> {
 
   Future<String?> makeRequest() async {
     String urlLoadIzin =
-        "https://myattendance-test.000webhostapp.com/php/load_sakitadminhistory.php";
+        "https://myattendance-test.000webhostapp.com/php/load_izinuseroverview.php";
     ProgressDialog pr = new ProgressDialog(context,
         type: ProgressDialogType.Normal, isDismissible: false);
-    pr.style(message: "Load Sakit List");
+    pr.style(message: "Load Izin List");
     pr.show();
-    http.post(Uri.parse(urlLoadIzin), body: {}).then((res) {
+    http.post(Uri.parse(urlLoadIzin), body: {
+      "email": widget.user.email,
+    }).then((res) {
       setState(() {
         var extractdata = json.decode(res.body);
-        data = extractdata["sakit"];
+        data = extractdata["izin"];
         perpage = (data!.length / 10);
         print("data");
         print(data);

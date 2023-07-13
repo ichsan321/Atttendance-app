@@ -204,7 +204,9 @@ class _addcutiState extends State<addcuti> {
 
     print(diff.inDays);
 
-    if ((startdateinput != null && enddateinput != null && cutiinput != null)) {
+    if ((startdateinput.text.length > 5 &&
+        enddateinput.text.length > 5 &&
+        cutiinput.text.length > 5)) {
       ProgressDialog pr = new ProgressDialog(context,
           type: ProgressDialogType.Normal, isDismissible: false);
       pr.style(message: "in progress");

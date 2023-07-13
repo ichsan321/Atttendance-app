@@ -7,11 +7,15 @@ import 'package:my_project/addSakitscreen.dart';
 import 'package:my_project/addabsenscreen.dart';
 import 'package:my_project/addcutiscreen.dart';
 import 'package:my_project/admin.dart';
+import 'package:my_project/cutipegawai_admin.dart';
+import 'package:my_project/izinpegawai_admin.dart';
 import 'package:my_project/loginscreen.dart';
+import 'package:my_project/sakitadmin.dart';
 import 'package:my_project/user.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:http/http.dart' as http;
+import 'package:my_project/cutipegawai_admin.dart';
 
 import 'absenkeluarscreen.dart';
 
@@ -495,14 +499,26 @@ class _homepage_adminState extends State<homepage_admin> {
 
   void _izinbutton() async {
     print("izin button");
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => izinpegawaiadmin(admin: widget.admin)));
   }
 
   void _sakitbutton() async {
     print("sakit button");
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => sakitpegawaiadmin(admin: widget.admin)));
   }
 
   void _cutibutton() async {
     print("cuti button");
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => cutipegawaiadmin(admin: widget.admin)));
   }
 
   void _absenbutton() async {}

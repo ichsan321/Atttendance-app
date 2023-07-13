@@ -160,7 +160,7 @@ class _addSakitState extends State<addSakit> {
     print(dateinput.text);
     print(sakitinput.text);
 
-    if ((dateinput != null && sakitinput != null)) {
+    if ((dateinput.text.length > 5 && sakitinput.text.length > 4)) {
       ProgressDialog pr = new ProgressDialog(context,
           type: ProgressDialogType.Normal, isDismissible: false);
       pr.style(message: "in progress");
