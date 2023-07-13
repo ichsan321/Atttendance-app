@@ -54,10 +54,7 @@ class _MyHomePageAdminState extends State<Mainadmincsreen> {
             label: 'Home Page',
           ),
           BottomNavigationBarItem(
-            icon: Badge(
-              position: BadgePosition.topEnd(),
-              child: Icon(Icons.book),
-            ),
+            icon: Icon(Icons.book),
             label: 'Izin',
             backgroundColor: Colors.blue,
           ),

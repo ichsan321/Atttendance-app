@@ -201,8 +201,7 @@ class _addcutiState extends State<addcuti> {
     DateTime awal = DateTime.parse(startdateinput.text);
     DateTime akhir = DateTime.parse(enddateinput.text);
     Duration diff = akhir.difference(awal);
-
-    print(diff.inDays);
+    print(diff.inDays + 1);
 
     if ((startdateinput.text.length > 5 &&
         enddateinput.text.length > 5 &&
@@ -217,7 +216,7 @@ class _addcutiState extends State<addcuti> {
         'dateawal': (startdateinput.text).toString(),
         'dateakhir': (enddateinput.text).toString(),
         'keterangan': cutiinput.text,
-        'totalcuti': diff.inDays.toString(),
+        'totalcuti': (diff.inDays + 1).toString(),
       }).then((res) {
         print(res.statusCode);
         print(res.body);

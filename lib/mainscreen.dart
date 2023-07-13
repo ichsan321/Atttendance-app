@@ -51,13 +51,9 @@ class _MyHomePageState extends State<Maincsreen> {
             label: 'Home Page',
           ),
           BottomNavigationBarItem(
-            icon: Badge(
-                position: BadgePosition.topEnd(),
-                child: Icon(Icons.book),
-                badgeContent: Text(
-                  "1",
-                  style: TextStyle(color: Colors.white),
-                )),
+            icon: Icon(
+              Icons.book,
+            ),
             label: 'Izin',
             backgroundColor: Colors.blue,
           ),
