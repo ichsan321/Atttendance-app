@@ -203,7 +203,7 @@ class _profilescreenState extends State<profilescreen> {
                       ),
                       Card(
                         child: ElevatedButton(
-                          onPressed: _izinscreen,
+                          onPressed: _sisascreen,
                           child: Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Column(
@@ -655,5 +655,9 @@ class _profilescreenState extends State<profilescreen> {
         context,
         MaterialPageRoute(
             builder: (context) => cutiuseroverview(user: widget.user)));
+  }
+
+  void _sisascreen() async {
+    print("sisa button");
   }
 }

@@ -75,7 +75,7 @@ class _cutipegawaiadminState extends State<sakitpegawaiadmin> {
                       ),
                     ),
                     leading: new IconButton(
-                      icon: new Icon(Icons.arrow_back_ios, color: Colors.grey),
+                      icon: new Icon(Icons.arrow_back_ios, color: Colors.white),
                       onPressed: () => Navigator.pop(context),
                     ),
                     //You can make this transparent
