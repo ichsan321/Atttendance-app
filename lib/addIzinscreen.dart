@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:my_project/izinscreen.dart';
@@ -6,6 +7,7 @@ import 'package:my_project/user.dart';
 import 'package:toast/toast.dart';
 import 'package:http/http.dart' as http;
 import 'package:progress_dialog/progress_dialog.dart';
+import 'package:image_picker/image_picker.dart';
 
 String urlUpload =
     "https://myattendance-test.000webhostapp.com/php/add_izin.php";
@@ -19,6 +21,8 @@ class AddIzin extends StatefulWidget {
 }
 
 class _AddIzinState extends State<AddIzin> {
+  File? _image;
+  String pathAsset = 'asset/image/file.png';
   TextEditingController dateinput = TextEditingController();
   TextEditingController keteranganizin = TextEditingController();
 
@@ -107,7 +111,24 @@ class _AddIzinState extends State<AddIzin> {
                 ),
               ),
               SizedBox(
-                height: 500.0,
+                height: 5,
+              ),
+              Text("Please Input the file"),
+              GestureDetector(
+                  onTap: () => mainBottomSheet(context),
+                  child: Container(
+                    width: 100,
+                    height: 100,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                      image: _image == null
+                          ? AssetImage(pathAsset)
+                          : FileImage(_image!) as ImageProvider,
+                      fit: BoxFit.fill,
+                    )),
+                  )),
+              SizedBox(
+                height: 350.0,
               ),
               InkWell(
                 child: Container(
@@ -147,6 +168,58 @@ class _AddIzinState extends State<AddIzin> {
             ]),
           )),
     );
+  }
+
+  mainBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              _createTile(context, 'Camera', Icons.camera, _action1),
+              _createTile(context, 'Gallery', Icons.photo_album, _action2),
+            ],
+          );
+        });
+  }
+
+  ListTile _createTile(
+      BuildContext context, String name, IconData icon, Function action) {
+    return ListTile(
+      leading: Icon(icon),
+      title: Text(name),
+      onTap: () {
+        Navigator.pop(context);
+        action();
+      },
+    );
+  }
+
+  //Take profile picture from camera
+  _action1() async {
+    print('action camera');
+    XFile? _cameraImage;
+
+    _cameraImage = (await ImagePicker().pickImage(source: ImageSource.camera));
+    if (_cameraImage != null) {
+      //Avoid crash if user cancel picking image
+      _image = File(_cameraImage.path);
+      setState(() {});
+    }
+  }
+
+  //Take profile picture from gallery
+  _action2() async {
+    print('action gallery');
+    XFile? _galleryImage;
+
+    _galleryImage = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (_galleryImage != null) {
+      //Avoid crash if user cancel picking image
+      _image = File(_galleryImage.path);
+      setState(() {});
+    }
   }
 
   void _Izinbutton() async {
