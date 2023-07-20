@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:my_project/izinscreen.dart';
@@ -117,8 +118,8 @@ class _AddIzinState extends State<AddIzin> {
               GestureDetector(
                   onTap: () => mainBottomSheet(context),
                   child: Container(
-                    width: 100,
-                    height: 100,
+                    width: 60,
+                    height: 60,
                     decoration: BoxDecoration(
                         image: DecorationImage(
                       image: _image == null
@@ -234,7 +235,9 @@ class _AddIzinState extends State<AddIzin> {
           type: ProgressDialogType.Normal, isDismissible: false);
       pr.style(message: "in progress");
       pr.show();
+      String base64Image = base64Encode(_image!.readAsBytesSync());
       http.post(Uri.parse(urlUpload), body: {
+        "encoded_string": base64Image,
         'email': widget.user.email,
         'name': widget.user.name,
         'date': (dateinput.text).toString(),

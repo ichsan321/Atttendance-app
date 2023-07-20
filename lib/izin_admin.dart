@@ -223,32 +223,80 @@ class _izin_adminState extends State<izin_admin> {
                                         SizedBox(
                                           height: 5,
                                         ),
-                                        (data![index]['aprove'].toString() ==
-                                                "Administrator")
-                                            ? Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text("Approve By : "),
-                                                  Text(
-                                                    data![index]['aprove'],
-                                                    style: TextStyle(
-                                                        color: Colors.green),
-                                                  )
-                                                ],
-                                              )
-                                            : Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text("Approve By : "),
-                                                  Text(
-                                                    data![index]['aprove'],
-                                                    style: TextStyle(
-                                                        color: Colors.red),
-                                                  )
-                                                ],
+                                        TextButton(
+                                          onPressed: () => showDialog<String>(
+                                            context: context,
+                                            builder: (BuildContext context) =>
+                                                AlertDialog(
+                                              content: SizedBox(
+                                                width: 500.0,
+                                                height: 700.0,
+                                                child: Image.network(
+                                                  "https://myattendance-test.000webhostapp.com/izin/${data![index]['email'] + data![index]['date']}.jpg",
+                                                  fit: BoxFit.cover,
+                                                  errorBuilder: (context, error,
+                                                      stackTrace) {
+                                                    return Container(
+                                                      alignment:
+                                                          Alignment.center,
+                                                      child: const Text(
+                                                        'There is no data',
+                                                        style: TextStyle(
+                                                            fontSize: 20),
+                                                      ),
+                                                    );
+                                                  },
+                                                ),
                                               ),
+                                              actions: <Widget>[
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          context, 'Cancel'),
+                                                  child: const Text('Cancel'),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          child: const Text('Additional file'),
+                                        ),
+                                        // Container(
+                                        //     width: 150.0,
+                                        //     height: 150.0,
+                                        //     decoration: new BoxDecoration(
+                                        //         shape: BoxShape.circle,
+                                        //         border: Border.all(
+                                        //             color: Colors.black),
+                                        //         image: new DecorationImage(
+                                        //             fit: BoxFit.cover,
+                                        //             image: new NetworkImage(
+                                        //                 "https://myattendance-test.000webhostapp.com/izin/${data![index]['email'] + data![index]['date']}.jpg")))),
+                                        // (data![index]['aprove'].toString() ==
+                                        //         "Administrator")
+                                        //     ? Row(
+                                        //         mainAxisAlignment:
+                                        //             MainAxisAlignment.center,
+                                        //         children: [
+                                        //           Text("Approve By : "),
+                                        //           Text(
+                                        //             data![index]['aprove'],
+                                        //             style: TextStyle(
+                                        //                 color: Colors.green),
+                                        //           )
+                                        //         ],
+                                        //       )
+                                        //     : Row(
+                                        //         mainAxisAlignment:
+                                        //             MainAxisAlignment.center,
+                                        //         children: [
+                                        //           Text("Approve By : "),
+                                        //           Text(
+                                        //             data![index]['aprove'],
+                                        //             style: TextStyle(
+                                        //                 color: Colors.red),
+                                        //           )
+                                        //         ],
+                                        //       ),
                                         (data![index]['aprove'].length > 0)
                                             ? Row(
                                                 mainAxisAlignment:

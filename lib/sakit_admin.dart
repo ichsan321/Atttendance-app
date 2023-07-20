@@ -27,6 +27,7 @@ class _sakit_adminState extends State<sakit_admin> {
   Position? _currentPosition;
   String _currentAddress = "Searching current location...";
   List? data;
+  ImageErrorWidgetBuilder? errorBuilder;
 
   @override
   void initState() {
@@ -201,8 +202,43 @@ class _sakit_adminState extends State<sakit_admin> {
                                         SizedBox(
                                           height: 5,
                                         ),
-                                        Text("Approve By : " +
-                                            data![index]['Approve']),
+                                        TextButton(
+                                          onPressed: () => showDialog<String>(
+                                            context: context,
+                                            builder: (BuildContext context) =>
+                                                AlertDialog(
+                                              content: SizedBox(
+                                                width: 500.0,
+                                                height: 700.0,
+                                                child: Image.network(
+                                                  "https://myattendance-test.000webhostapp.com/sakit/${data![index]['email'] + data![index]['date']}.jpg",
+                                                  fit: BoxFit.cover,
+                                                  errorBuilder: (context, error,
+                                                      stackTrace) {
+                                                    return Container(
+                                                      alignment:
+                                                          Alignment.center,
+                                                      child: const Text(
+                                                        'There is no data',
+                                                        style: TextStyle(
+                                                            fontSize: 30),
+                                                      ),
+                                                    );
+                                                  },
+                                                ),
+                                              ),
+                                              actions: <Widget>[
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          context, 'Cancel'),
+                                                  child: const Text('Cancel'),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          child: const Text('Additional file'),
+                                        ),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.end,
