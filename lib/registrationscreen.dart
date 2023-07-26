@@ -249,34 +249,6 @@ class RegisterWidgetState extends State<RegisterWidget> {
         SizedBox(
           height: 5.0,
         ),
-        // TextField(
-        //   controller: _verificationcontroller,
-        //   keyboardType: TextInputType.number,
-        //   decoration: InputDecoration(
-        //     contentPadding: const EdgeInsets.all(16.0),
-        //     prefixIcon: Container(
-        //         padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
-        //         margin: const EdgeInsets.only(right: 8.0),
-        //         decoration: BoxDecoration(
-        //             color: Colors.black,
-        //             borderRadius: BorderRadius.only(
-        //                 topLeft: Radius.circular(30.0),
-        //                 bottomLeft: Radius.circular(30.0),
-        //                 topRight: Radius.circular(30.0),
-        //                 bottomRight: Radius.circular(10.0))),
-        //         child: Icon(
-        //           Icons.blur_circular,
-        //           color: Colors.lightBlue,
-        //         )),
-        //     hintText: "Verification Code",
-        //     hintStyle: TextStyle(color: Colors.black),
-        //     border: OutlineInputBorder(
-        //         borderRadius: BorderRadius.circular(30.0),
-        //         borderSide: BorderSide.none),
-        //     filled: true,
-        //     fillColor: Colors.cyan.withOpacity(0.8),
-        //   ),
-        // ),
         SizedBox(
           height: 10,
         ),
@@ -358,7 +330,7 @@ class RegisterWidgetState extends State<RegisterWidget> {
     _cameraImage = (await ImagePicker().pickImage(source: ImageSource.camera));
     if (_cameraImage != null) {
       //Avoid crash if user cancel picking image
-      File _image = File(_cameraImage.path);
+      _image = File(_cameraImage.path);
 
       setState(() {});
     }
@@ -373,7 +345,7 @@ class RegisterWidgetState extends State<RegisterWidget> {
     if (_galleryImage != null) {
       //Avoid crash if user cancel picking image
 
-      File _image = File(_galleryImage.path);
+      _image = File(_galleryImage.path);
       setState(() {});
     }
   }
@@ -414,7 +386,9 @@ class RegisterWidgetState extends State<RegisterWidget> {
           type: ProgressDialogType.Normal, isDismissible: false);
       pr.style(message: "Registration in progress");
       pr.show();
+      String base64Image = base64Encode(_image!.readAsBytesSync());
       http.post(Uri.parse(urlUpload), body: {
+        "encoded_string": base64Image,
         'email': _email,
         'name': _name,
         'password': _password,

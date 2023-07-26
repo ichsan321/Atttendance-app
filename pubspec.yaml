@@ -45,6 +45,8 @@ dependencies:
   progress_dialog: ^1.2.4
   dropdown_button2: ^2.1.3
   flutter_slidable:
+  encrypt: ^5.0.1
+  random_string: ^1.1.0
 
 dev_dependencies:
   flutter_test:

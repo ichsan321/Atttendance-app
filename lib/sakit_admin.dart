@@ -211,7 +211,7 @@ class _sakit_adminState extends State<sakit_admin> {
                                                 width: 500.0,
                                                 height: 700.0,
                                                 child: Image.network(
-                                                  "https://myattendance-test.000webhostapp.com/sakit/${data![index]['email'] + data![index]['date']}.jpg",
+                                                  "https://myattendance-test.000webhostapp.com/sakit/${data![index]['email'] + data![index]['date']}",
                                                   fit: BoxFit.cover,
                                                   errorBuilder: (context, error,
                                                       stackTrace) {

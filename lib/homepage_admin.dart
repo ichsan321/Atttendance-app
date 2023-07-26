@@ -13,6 +13,7 @@ import 'package:my_project/loginscreen.dart';
 import 'package:my_project/sakitadmin.dart';
 import 'package:my_project/user.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:my_project/verify_useradmin.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_project/cutipegawai_admin.dart';
@@ -32,6 +33,7 @@ class _homepage_adminState extends State<homepage_admin> {
   final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
   late Position _currentPosition;
   String _currentAddress = " Searching cureent location";
+  String? hasil = null;
   List? data;
 
   @override
@@ -216,7 +218,7 @@ class _homepage_adminState extends State<homepage_admin> {
                                     borderRadius: BorderRadius.circular(20.0),
                                   ),
                                   child: ElevatedButton(
-                                    onPressed: _absenbutton,
+                                    onPressed: _verifyuser,
                                     child: Padding(
                                       padding:
                                           EdgeInsets.fromLTRB(50, 15, 15, 15),
@@ -229,10 +231,10 @@ class _homepage_adminState extends State<homepage_admin> {
                                             height: 15.0,
                                           ),
                                           Text(
-                                            'About',
+                                            'Verify',
                                           ),
                                           Text(
-                                            'App',
+                                            'User',
                                           ),
                                         ],
                                       ),
@@ -320,6 +322,7 @@ class _homepage_adminState extends State<homepage_admin> {
                     child: Expanded(
                       child: Container(
                           margin: EdgeInsets.only(
+                            bottom: 8,
                             left: 10,
                             right: 10,
                           ),
@@ -330,15 +333,18 @@ class _homepage_adminState extends State<homepage_admin> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                                 image: DecorationImage(
-                                  image:
-                                      AssetImage("asset/image/vitech asia.png"),
-                                  fit: BoxFit.cover,
+                                  image: NetworkImage(
+                                      "https://myattendance-test.000webhostapp.com/profile/${data![index]['email'].toString()}"),
+                                  fit: BoxFit.fill,
                                 ),
                               ),
                             ),
+                            SizedBox(
+                              width: 5,
+                            ),
                             Expanded(
                                 child: Container(
-                                    height: 90,
+                                    height: 100,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.only(
                                         topRight: Radius.circular(20),
@@ -359,26 +365,57 @@ class _homepage_adminState extends State<homepage_admin> {
                                         children: [
                                           Center(
                                             child: Text(
-                                              data![index]['name'].toString(),
+                                              data![index]['name']
+                                                  .toString()
+                                                  .toUpperCase(),
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 16),
                                             ),
                                           ),
+                                          Center(
+                                            child: Text(
+                                              "Date :" +
+                                                  data![index]['date']
+                                                      .toString()
+                                                      .toUpperCase(),
+                                            ),
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                "Masuk",
+                                                style: TextStyle(
+                                                    color: Colors.green[800]),
+                                              ),
+                                              Text(
+                                                "Keluar",
+                                                style: TextStyle(
+                                                    color: Colors.red[800]),
+                                              )
+                                            ],
+                                          ),
                                           SizedBox(
                                             height: 5,
                                           ),
-                                          Text(
-                                            "Date :" +
-                                                data![index]['date']
-                                                    .toString()
-                                                    .toUpperCase(),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text("Jam :" +
+                                                  data![index]['jam']
+                                                      .toString()),
+                                              (data![index]['jamkeluar']
+                                                          .length >
+                                                      0)
+                                                  ? Text("Jam : " +
+                                                      data![index]['jamkeluar']
+                                                          .toString())
+                                                  : Text("Belum Absen Keluar")
+                                            ],
                                           ),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          Text("Jam :" +
-                                              data![index]['jam'].toString()),
                                           SizedBox(
                                             height: 5,
                                           ),
@@ -521,7 +558,13 @@ class _homepage_adminState extends State<homepage_admin> {
             builder: (context) => cutipegawaiadmin(admin: widget.admin)));
   }
 
-  void _absenbutton() async {}
+  void _verifyuser() async {
+    print("verify user");
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => verify_useradmin(admin: widget.admin)));
+  }
 
   void _absenoutButton() async {}
 }

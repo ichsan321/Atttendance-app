@@ -11,6 +11,7 @@ import 'package:my_project/loginscreen.dart';
 import 'package:my_project/sakituser_overview.dart';
 import 'package:my_project/user.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:my_project/userprofile.dart';
 
 import 'absenkeluarscreen.dart';
 
@@ -77,14 +78,14 @@ class _profilescreenState extends State<profilescreen> {
                         ),
                         Center(
                           child: GestureDetector(
-                            onTap: _takePicture,
+                            onTap: _changeprofile,
                             child: Container(
                                 width: 50.0,
                                 height: 50.0,
                                 decoration: new BoxDecoration(
                                   image: new DecorationImage(
-                                      image: AssetImage(
-                                          'asset/image/peopleicon.png'),
+                                      image: NetworkImage(
+                                          "https://myattendance-test.000webhostapp.com/profile/${widget.user.email}"),
                                       fit: BoxFit.fill),
                                   shape: BoxShape.circle,
                                   border: Border.all(color: Colors.black),
@@ -570,24 +571,12 @@ class _profilescreenState extends State<profilescreen> {
         context, MaterialPageRoute(builder: (context) => LoginPage()));
   }
 
-  void _takePicture() async {
-    // if (widget.user.name == "not register") {
-    //   Toast.show("Not allowed", context,
-    //       duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-    //   return;
-    // }
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        // return object of type Dialog
-        return AlertDialog(
-            title: new Text("Take new profile picture?"),
-            content: new Text("Are your sure?"),
-            actions: <Widget>[
-              // usually buttons at the bottom of the dialog
-            ]);
-      },
-    );
+  void _changeprofile() async {
+    print("changeprofile button");
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => UpdateProfileScreen(user: widget.user)));
   }
 
   void _izinscreen() async {

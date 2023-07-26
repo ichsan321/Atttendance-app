@@ -1,9 +1,18 @@
 class User {
-  String email, name, phone, jabatan, totalsakit, totalcuti, totalizin, sisa;
+  String email,
+      name,
+      phone,
+      password,
+      jabatan,
+      totalsakit,
+      totalcuti,
+      totalizin,
+      sisa;
 
   User({
     required this.email,
     required this.name,
+    required this.password,
     required this.phone,
     required this.jabatan,
     required this.totalsakit,
