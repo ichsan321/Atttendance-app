@@ -407,7 +407,7 @@ class RegisterWidgetState extends State<RegisterWidget> {
           _jabatancontroller.text = '';
           pr.hide();
           Toast.show(
-              "Your Registration Is Succesfully, Please check on email from Admin to verification ",
+              "Your Registration Is Succesfully, Please inform to the admin to verified",
               context,
               duration: 3,
               gravity: Toast.BOTTOM,

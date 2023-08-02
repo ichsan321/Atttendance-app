@@ -258,6 +258,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
               Navigator.of(context).pop();
             }
+            pr.hide();
           });
         } else if (res.body == "failed") {
           Toast.show("There is some trouble with connection", context,

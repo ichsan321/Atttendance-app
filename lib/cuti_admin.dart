@@ -203,8 +203,6 @@ class _cuti_adminState extends State<cuti_admin> {
                                         SizedBox(
                                           height: 5,
                                         ),
-                                        Text("Approve By : " +
-                                            data![index]['approve']),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.end,
