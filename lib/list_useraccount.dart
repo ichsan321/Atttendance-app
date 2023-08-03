@@ -22,179 +22,103 @@ class list_useraccount extends StatefulWidget {
 }
 
 class _list_useraccountState extends State<list_useraccount> {
-  late GlobalKey<RefreshIndicatorState> refreshKey;
+  // late GlobalKey<RefreshIndicatorState> refreshKey;
 
   final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
   Position? _currentPosition;
   String _currentAddress = "Searching current location...";
-  List? data;
+  List? data = [];
   var searchController = new TextEditingController();
+  List? data1 = [];
 
   @override
-  void initState() {
+  initState() {
     super.initState();
-    refreshKey = GlobalKey<RefreshIndicatorState>();
-    _getCurrentLocation();
+    // refreshKey = GlobalKey<RefreshIndicatorState>();
+    // _getCurrentLocation();
+    init();
+
+    print("result di inistate");
+    print(data1);
+  }
+
+  void _runFilter(String enteredKeyword) {
+    List? result;
+
+    if (enteredKeyword.isEmpty) {
+      result = data;
+    } else {
+      result = data
+          ?.where((data) => data!["NAME"]
+              .toLowerCase()
+              .contains(enteredKeyword.toLowerCase()))
+          .toList();
+      print("Test1");
+      print(result);
+    }
+    setState(() {
+      data1 = result;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.blue));
     return Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: RefreshIndicator(
-          key: refreshKey,
-          color: Colors.cyan,
-          onRefresh: () async {
-            await refreshList();
-          },
-          child: ListView.builder(
-              //Step 6: Count the data
-              itemCount: data == null ? 1 : data!.length + 1,
-              itemBuilder: (context, index) {
-                if (index == 0) {
-                  return AppBar(
-                    backgroundColor: Colors.red[400],
-                    toolbarHeight: 150,
-                    title: Container(
-                      child: Column(
-                        children: <Widget>[
-                          Stack(children: <Widget>[
-                            Column(
-                              children: <Widget>[
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Center(
-                                  child: Text("List User Account",
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black)),
-                                ),
-                                SizedBox(height: 10),
-                                TextField(
-                                  controller: searchController,
-                                  decoration: InputDecoration(
-                                      labelText: "Search",
-                                      hintText: "Search",
-                                      prefixIcon: Icon(Icons.search),
-                                      border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(25.0)))),
-                                ),
-                              ],
-                            ),
-                          ]),
-                        ],
-                      ),
-                    ),
-                    leading: new IconButton(
-                      icon: new Icon(Icons.arrow_back_ios, color: Colors.white),
-                      onPressed: () => Navigator.pop(context),
-                    ),
-
-                    //You can make this transparent
-                    elevation: 0.0, //No shadow
-                  );
-                }
-
-                index -= 1;
-                return Container(
-                  padding: EdgeInsets.all(2.0),
-                  child: Card(
-                    elevation: 2,
-                    child: Slidable(
-                      key: const ValueKey(0),
-                      endActionPane: ActionPane(
-                        motion: ScrollMotion(),
-                        dismissible: DismissiblePane(onDismissed: () {}),
-                        children: [
-                          SlidableAction(
-                            flex: 1,
-                            onPressed: (BuildContext context) {
-                              onIzinDelete(data![index]['EMAIL'].toString());
-                            },
-                            backgroundColor: Color.fromARGB(255, 184, 30, 30),
-                            foregroundColor: Colors.white,
-                            icon: Icons.delete,
-                            label: 'Delete',
+      appBar: AppBar(
+        title: const Text('List All User Registered'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 20,
+            ),
+            TextField(
+              onChanged: (value) => _runFilter(value),
+              decoration: const InputDecoration(
+                  labelText: 'Search', suffixIcon: Icon(Icons.search)),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Expanded(
+              child: data1!.isNotEmpty
+                  ? ListView.builder(
+                      itemCount: data1!.length,
+                      itemBuilder: (context, index) => Card(
+                        key: ValueKey(data1![index]["NAME"]),
+                        color: Colors.amberAccent,
+                        elevation: 4,
+                        margin: const EdgeInsets.symmetric(vertical: 5),
+                        child: ListTile(
+                          leading: Text(
+                            data1![index]["Id"].toString(),
+                            style: const TextStyle(fontSize: 24),
                           ),
-                        ],
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Expanded(
-                              child: Container(
-                                child: Column(
-                                  children: <Widget>[
-                                    SizedBox(
-                                      height: 5.0,
-                                    ),
-                                    Text(
-                                        "Name : " +
-                                            data![index]['NAME']
-                                                .toString()
-                                                .toUpperCase(),
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold)),
-                                    SizedBox(
-                                      height: 5.0,
-                                    ),
-                                    Text(
-                                        "Email : " +
-                                            data![index]['EMAIL'].toString(),
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                        )),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text("NO HP : " +
-                                        data![index]['PHONE'].toString()),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text("Jabatan : " +
-                                        data![index]['JABATAN'].toString()),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                              primary: Color.fromARGB(190, 83,
-                                                  205, 49), // Background color
-                                              onPrimary: Colors.white,
-                                            ),
-                                            onPressed: () => onDeleted(
-                                                  data![index]['NAME']
-                                                      .toString(),
-                                                  data![index]['EMAIL']
-                                                      .toString(),
-                                                ),
-                                            child: Text("Deleted")),
-                                        SizedBox(
-                                          width: 15,
-                                        ),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
+                          title: Text(
+                            data1![index]['NAME'].toUpperCase(),
+                          ),
+                          subtitle:
+                              Text(data1![index]['JABATAN'].toUpperCase()),
+                          trailing: InkWell(
+                              onTap: () => onDeleted(
+                                    data![index]['Id'].toString(),
+                                    data![index]['NAME'].toString(),
+                                  ),
+                              child: Icon(Icons.delete_outline)),
                         ),
                       ),
+                    )
+                  : const Text(
+                      'No results found',
+                      style: TextStyle(fontSize: 24),
                     ),
-                  ),
-                );
-              }),
-        ));
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   _getCurrentLocation() async {
@@ -204,11 +128,16 @@ class _list_useraccountState extends State<list_useraccount> {
       setState(() {
         _currentPosition = position;
         print(_currentPosition);
+        print("this is button current location ");
       });
       _getAddressFromLatLng();
     }).catchError((e) {
       print(e);
     });
+  }
+
+  Future _getdata() async {
+    init();
   }
 
   _getAddressFromLatLng() async {
@@ -221,6 +150,7 @@ class _list_useraccountState extends State<list_useraccount> {
       setState(() {
         _currentAddress =
             "${place.name},${place.locality}, ${place.postalCode}, ${place.country}";
+        print("this is get address from latlong");
         init(); //load data from database into list array 'data'
       });
     } catch (e) {
@@ -231,8 +161,11 @@ class _list_useraccountState extends State<list_useraccount> {
   Future<String?> makeRequest() async {
     String urlLoadUser =
         "https://myattendance-test.000webhostapp.com/php/list_useraccount.php";
-    ProgressDialog pr = new ProgressDialog(context,
-        type: ProgressDialogType.Normal, isDismissible: false);
+    ProgressDialog pr = new ProgressDialog(
+      context,
+      type: ProgressDialogType.Normal,
+      isDismissible: false,
+    );
     pr.style(message: "Load User Account List");
     pr.show();
     http.post(Uri.parse(urlLoadUser), body: {}).then((res) {
@@ -242,6 +175,8 @@ class _list_useraccountState extends State<list_useraccount> {
         perpage = (data!.length / 10);
         print("data");
         print(data);
+        data1 = data;
+
         pr.hide();
       });
     }).catchError((err) {
@@ -252,19 +187,19 @@ class _list_useraccountState extends State<list_useraccount> {
   }
 
   Future init() async {
-    this.makeRequest();
+    makeRequest();
     //_getCurrentLocation();
   }
 
   void onDeleted(
+    String id,
     String name,
-    String email,
   ) {
     print("this is accepted button ");
-    _showDialog(name, email);
+    _showDialog(id, name);
   }
 
-  void _showDialog(String name, String email) {
+  void _showDialog(String id, name) {
     // flutter defined function
     showDialog(
       context: context,
@@ -272,7 +207,7 @@ class _list_useraccountState extends State<list_useraccount> {
         // return object of type Dialog
         return AlertDialog(
           title: new Text(
-              "Apakah anda yakin ingin menghapus account dengan nama : " +
+              "Apakah anda yakin ingin menghapus account dengan nama " +
                   name +
                   " ?"),
           actions: <Widget>[
@@ -281,7 +216,7 @@ class _list_useraccountState extends State<list_useraccount> {
               child: new Text("Ya"),
               onPressed: () {
                 Navigator.of(context).pop();
-                AcceptRequest(email);
+                delete(id);
               },
             ),
             new ElevatedButton(
@@ -296,16 +231,16 @@ class _list_useraccountState extends State<list_useraccount> {
     );
   }
 
-  Future<String?> AcceptRequest(String email) async {
-    print("email user " + email);
+  Future<String?> delete(String id) async {
+    print("email user " + id);
     String urlAcceptedIzin =
         "https://myattendance-test.000webhostapp.com/php/deleted_useradmin.php";
     ProgressDialog pr = new ProgressDialog(context,
         type: ProgressDialogType.Normal, isDismissible: false);
-    pr.style(message: "Accepting Izin");
+    pr.style(message: "Deleting User");
     pr.show();
     http.post(Uri.parse(urlAcceptedIzin), body: {
-      "email": email.toString(),
+      "id": id.toString(),
     }).then((res) {
       print(res.body);
       if (res.body == "success") {
