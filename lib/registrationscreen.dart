@@ -326,7 +326,6 @@ class RegisterWidgetState extends State<RegisterWidget> {
   _action1() async {
     print('action camera');
     XFile? _cameraImage;
-
     _cameraImage = (await ImagePicker().pickImage(source: ImageSource.camera));
     if (_cameraImage != null) {
       //Avoid crash if user cancel picking image
