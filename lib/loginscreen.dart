@@ -255,7 +255,10 @@ class _LoginPageState extends State<LoginPage> {
               sisa: dres[9]);
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => Maincsreen(user: user)));
-        } else {
+        } else if (dres[0] == "failed") {
+          Toast.show(
+              "Please verify your account first with Administrator", context,
+              duration: 5, gravity: Toast.BOTTOM, backgroundColor: Colors.red);
           pr.hide();
         }
       }).catchError((err) {

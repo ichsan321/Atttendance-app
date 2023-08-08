@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_project/loginscreen.dart';
 import 'package:toast/toast.dart';
 import 'dart:io';
+import 'package:my_project/constant.dart';
 
 void main() {
   HttpOverrides.global = MyHttpOverrides();
@@ -16,9 +17,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: isDark == true ? darkTheme : lightTheme,
+      darkTheme: darkTheme,
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Center(

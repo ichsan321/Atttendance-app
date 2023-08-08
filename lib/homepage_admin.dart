@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:my_project/addIzinscreen.dart';
@@ -19,6 +18,7 @@ import 'package:progress_dialog/progress_dialog.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_project/cutipegawai_admin.dart';
 import 'package:my_project/list_useraccount.dart';
+import 'package:my_project/aboutappuser.dart';
 
 import 'absenkeluarscreen.dart';
 
@@ -281,7 +281,7 @@ class _homepage_adminState extends State<homepage_admin> {
                                   borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 child: ElevatedButton(
-                                  onPressed: _verifyuser,
+                                  onPressed: buttonabout,
                                   child: Padding(
                                     padding:
                                         EdgeInsets.fromLTRB(10, 15, 58, 10),
@@ -580,6 +580,12 @@ class _homepage_adminState extends State<homepage_admin> {
     print(" this is log out button ");
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => LoginPage()));
+  }
+
+  void buttonabout() async {
+    print("this is about app button");
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => aboutuserapp()));
   }
 
   void _takePicture() async {

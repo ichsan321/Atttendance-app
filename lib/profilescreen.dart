@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:my_project/aboutappuser.dart';
 import 'package:my_project/addIzinscreen.dart';
 import 'package:my_project/addSakitscreen.dart';
 import 'package:my_project/addabsenscreen.dart';
@@ -12,7 +13,6 @@ import 'package:my_project/sakituser_overview.dart';
 import 'package:my_project/user.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:my_project/userprofile.dart';
-
 import 'absenkeluarscreen.dart';
 
 class profilescreen extends StatefulWidget {
@@ -28,6 +28,7 @@ class _profilescreenState extends State<profilescreen> {
   late Position _currentPosition;
   String _currentAddress = " Searching cureent location";
   List? data;
+  ThemeMode _themeMode = ThemeMode.system;
 
   @override
   void initState() {
@@ -446,7 +447,7 @@ class _profilescreenState extends State<profilescreen> {
                                     borderRadius: BorderRadius.circular(20.0),
                                   ),
                                   child: ElevatedButton(
-                                    onPressed: _izinscreen,
+                                    onPressed: aboutapp,
                                     child: Padding(
                                       padding: EdgeInsets.all(25.0),
                                       child: Column(
@@ -526,6 +527,12 @@ class _profilescreenState extends State<profilescreen> {
     );
   }
 
+  void changeTheme(ThemeMode themeMode) {
+    setState(() {
+      _themeMode = themeMode;
+    });
+  }
+
   _getCurrentLocation() async {
     geolocator
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
@@ -586,6 +593,11 @@ class _profilescreenState extends State<profilescreen> {
             builder: (context) => AddIzin(
                   user: widget.user,
                 )));
+  }
+
+  void aboutapp() async {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => aboutuserapp()));
   }
 
   void _sakitscreen() async {

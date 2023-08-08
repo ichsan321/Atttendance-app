@@ -62,6 +62,7 @@ class _addabsenscreenState extends State<addabsenscreen> {
           child: Container(
             height: 250,
             child: Card(
+              color: Colors.white10,
               child: Padding(
                 padding: EdgeInsets.all(15.0),
                 child: Column(
