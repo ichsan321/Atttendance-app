@@ -9,9 +9,7 @@ import 'package:http/http.dart' as http;
 import 'package:progress_dialog/progress_dialog.dart';
 import 'user.dart';
 import 'package:my_project/login_admin.dart';
-// import 'package:mytolongbeli/forgotpassword.dart';
 
-// String urlSecurityCodeForResetPass ="http://michannael.com/mytolongbeli/php/secure_code.php";
 String urlLogin = "https://myattendance-test.000webhostapp.com/php/login.php";
 
 final TextEditingController _emcontroller = TextEditingController();
@@ -276,121 +274,9 @@ class _LoginPageState extends State<LoginPage> {
 
   void _onForgot() {
     print('Forgot');
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => (Myadmin())));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Myadmin()));
   }
-
-  // if (_isEmailValid(_email)) {
-  //   ProgressDialog pr = new ProgressDialog(context,
-  //       type: ProgressDialogType.Normal, isDismissible: false);
-  //   pr.style(message: "Sending Email");
-  //   pr.show();
-  //   http.post(urlSecurityCodeForResetPass, body: {
-  //     "email": _email,
-  //     "password": _password,
-  //   }).then((res) {
-  //     print("secure code : " + res.body);
-  //     if (res.body == "error") {
-  //       pr.dismiss();
-
-  //       Toast.show('error', context,
-  //           duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-  //     } else {
-  //       pr.dismiss();
-
-  //       _saveEmailForPassReset(_email);
-  //       _saveSecureCode(res.body);
-
-  //       Toast.show('Security code sent to your email', context,
-  //           duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-
-  //       Navigator.push(context,
-  //           MaterialPageRoute(builder: (context) => ResetPassword()));
-  //     }
-  //   }).catchError((err) {
-  //     pr.dismiss();
-  //     print(err);
-  //   });
-  // } else {
-  //   Toast.show('Please put the email first', context,
-  //       duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-  // }
 }
-//   void _saveEmailForPassReset(String code) async {
-//     print('saving preferences');
-//     SharedPreferences prefs = await SharedPreferences.getInstance();
-//     await prefs.setString('resetPassEmail', code);
-//   }
-
-//   void _saveSecureCode(String code) async {
-//     print('saving preferences');
-//     SharedPreferences prefs = await SharedPreferences.getInstance();
-//     await prefs.setString('secureCode', code);
-//   }
-
-//   void _onChange(bool value) {
-//     setState(() {
-//       _isChecked = value;
-//       savepref(value);
-//     });
-//   }
-
-//   void loadpref() async {
-//     print('Inside loadpref()');
-//     SharedPreferences prefs = await SharedPreferences.getInstance();
-//     _email = (prefs.getString('email'));
-//     _password = (prefs.getString('pass'));
-//     print(_email);
-//     print(_password);
-//     if (_email.length > 1) {
-//       _emcontroller.text = _email;
-//       _passcontroller.text = _password;
-//       setState(() {
-//         _isChecked = true;
-//       });
-//     } else {
-//       print('No pref');
-//       setState(() {
-//         _isChecked = false;
-//       });
-//     }
-//   }
-
-//   void savepref(bool value) async {
-//     print('Inside savepref');
-//     _email = _emcontroller.text;
-//     _password = _passcontroller.text;
-//     SharedPreferences prefs = await SharedPreferences.getInstance();
-//     if (value) {
-//       //true save pref
-//       if (_isEmailValid(_email) && (_password.length > 5)) {
-//         await prefs.setString('email', _email);
-//         await prefs.setString('pass', _password);
-//         print('Save pref $_email');
-//         print('Save pref $_password');
-//         Toast.show("Preferences have been saved", context,
-//             duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
-//       } else {
-//         print('No email');
-//         setState(() {
-//           _isChecked = false;
-//         });
-//         Toast.show("Check your credentials", context,
-//             duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
-//       }
-//     } else {
-//       await prefs.setString('email', '');
-//       await prefs.setString('pass', '');
-//       setState(() {
-//         _emcontroller.text = '';
-//         _passcontroller.text = '';
-//         _isChecked = false;
-//       });
-//       print('Remove pref');
-//       Toast.show("Preferences have been removed", context,
-//           duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
-//     }
-//   }
 
 Future<bool> _onBackPressAppBar() async {
   SystemNavigator.pop();

@@ -10,6 +10,7 @@ import 'dart:math';
 import 'package:random_string/random_string.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:toast/toast.dart';
+import 'package:flutter/services.dart';
 
 String urluploadImage =
     "https://myattendance-test.000webhostapp.com/php/upload_imageprofile.php";
@@ -30,8 +31,11 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   TextEditingController phone = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(statusBarColor: Colors.black));
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blue,
         title: Container(
           child: Column(
             children: <Widget>[

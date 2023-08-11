@@ -12,6 +12,7 @@ class _aboutuserappState extends State<aboutuserapp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blue,
         title: Text("About App"),
       ),
       body: Container(

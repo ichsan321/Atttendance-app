@@ -9,6 +9,7 @@ import 'package:toast/toast.dart';
 import 'package:http/http.dart' as http;
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:my_project/constant.dart';
 
 String pathAsset = 'asset/image/peopleicon.png';
 String urlUpload =
@@ -38,6 +39,7 @@ class _RegisterUserState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle(statusBarColor: Colors.black));
+
     return WillPopScope(
       onWillPop: _onBackPressAppBar,
       child: Scaffold(

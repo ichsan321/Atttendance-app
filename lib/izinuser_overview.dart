@@ -36,7 +36,7 @@ class _cutipegawaiadminState extends State<izinuseroverview> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.blue));
+        SystemUiOverlayStyle(statusBarColor: Colors.black));
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: RefreshIndicator(
@@ -51,6 +51,7 @@ class _cutipegawaiadminState extends State<izinuseroverview> {
               itemBuilder: (context, index) {
                 if (index == 0) {
                   return AppBar(
+                    backgroundColor: Colors.blue,
                     title: Container(
                       child: Column(
                         children: <Widget>[
