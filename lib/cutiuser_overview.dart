@@ -66,7 +66,7 @@ class _cutipegawaiadminState extends State<cutiuseroverview> {
                                       style: TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.black)),
+                                          color: Colors.white)),
                                 ),
                                 SizedBox(height: 10),
                               ],

@@ -47,7 +47,7 @@ class _cuti_adminState extends State<cuti_admin> {
               key: refreshKey,
               color: Colors.cyan,
               onRefresh: () async {
-                //await refreshList();
+                await refreshList();
               },
               child: ListView.builder(
                   //Step 6: Count the data
@@ -319,7 +319,7 @@ class _cuti_adminState extends State<cuti_admin> {
 
   Future init() async {
     this.makeRequest();
-    //_getCurrentLocation();
+    _getCurrentLocation();
   }
 
   void onAccepted(String id, String name, String email, String dateawal,
@@ -334,12 +334,37 @@ class _cuti_adminState extends State<cuti_admin> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: new Text("Apakah Anda Yakin Untuk Menyetujui Cuti ini ?" +
-                name +
-                "Pada Tanggal " +
-                dateawal +
-                "Sampai Tanggal " +
-                dateakhir),
+            title: Column(children: [
+              Text("Apakah anda yakin untuk"),
+              Row(
+                children: [
+                  Text("menyetujui cuti "),
+                  Text(
+                    name,
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Text("dari tanggal "),
+                  Text(
+                    dateawal,
+                    style: TextStyle(color: Colors.red),
+                  )
+                ],
+              ),
+              Row(
+                children: [
+                  Text("sampai "),
+                  Text(
+                    dateakhir,
+                    style: TextStyle(color: Colors.red),
+                  ),
+                  Text(" ?")
+                ],
+              )
+            ]),
             actions: <Widget>[
               // usually buttons at the bottom of the dialog
               new ElevatedButton(

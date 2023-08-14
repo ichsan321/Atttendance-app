@@ -48,7 +48,7 @@ class _izin_adminState extends State<izin_admin> {
               key: refreshKey,
               color: Colors.cyan,
               onRefresh: () async {
-                //await refreshList();
+                await refreshList();
               },
               child: ListView.builder(
                   //Step 6: Count the data
@@ -454,11 +454,33 @@ class _izin_adminState extends State<izin_admin> {
       builder: (BuildContext context) {
         // return object of type Dialog
         return AlertDialog(
-          title: new Text("Apakah anda yakin ingin menyetujui izin  " +
-              name +
-              " pada tanggal " +
-              date +
-              " ?"),
+          title: Column(
+            children: [
+              Text(
+                "Apakah anda yakin ingin",
+              ),
+              Row(
+                children: [
+                  Text("menyetujui izin "),
+                  Text(
+                    name,
+                    style: TextStyle(color: Colors.red),
+                  )
+                ],
+              ),
+              Row(
+                children: [
+                  Text("pada tanggal "),
+                  Text(
+                    date,
+                    style: TextStyle(color: Colors.red),
+                  ),
+                  Text(" ?")
+                ],
+              )
+            ],
+          ),
+
           // content: new Text("Are your sure?"),
           actions: <Widget>[
             // usually buttons at the bottom of the dialog

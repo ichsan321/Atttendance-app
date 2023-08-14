@@ -48,7 +48,7 @@ class _sakit_adminState extends State<sakit_admin> {
               key: refreshKey,
               color: Colors.cyan,
               onRefresh: () async {
-                //await refreshList();
+                await refreshList();
               },
               child: ListView.builder(
                   //Step 6: Count the data
@@ -364,10 +364,30 @@ class _sakit_adminState extends State<sakit_admin> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("Apakah anda yakin ingin menyetujui sakit " +
-                name +
-                " pada tanggal " +
-                date),
+            title: Column(
+              children: [
+                Text("Apakah anda yakin ingin"),
+                Row(
+                  children: [
+                    Text("menyetujui sakit "),
+                    Text(
+                      name,
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text("pada tanggal "),
+                    Text(
+                      date,
+                      style: TextStyle(color: Colors.red),
+                    ),
+                    Text(" ?")
+                  ],
+                )
+              ],
+            ),
             actions: <Widget>[
               ElevatedButton(
                 child: Text("Ya"),
