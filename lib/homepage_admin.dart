@@ -19,6 +19,7 @@ import 'package:http/http.dart' as http;
 import 'package:my_project/cutipegawai_admin.dart';
 import 'package:my_project/list_useraccount.dart';
 import 'package:my_project/aboutappuser.dart';
+import 'package:flutter/services.dart';
 
 import 'absenkeluarscreen.dart';
 
@@ -47,6 +48,9 @@ class _homepage_adminState extends State<homepage_admin> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(statusBarColor: Colors.black));
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: RefreshIndicator(
@@ -365,9 +369,13 @@ class _homepage_adminState extends State<homepage_admin> {
                                 width: 5,
                               ),
                               Text(
-                                "Absen Pegawai Hari ini",
+                                "Absen Pegawai Hari ini             ",
                                 style: TextStyle(fontSize: 12),
                               ),
+                              Text(" Total : " + data!.length.toString(),
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ))
                             ],
                           ),
                         )

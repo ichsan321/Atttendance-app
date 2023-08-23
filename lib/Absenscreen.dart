@@ -37,7 +37,7 @@ class _AbsenscreenState extends State<Absenscreen> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.blue));
+        SystemUiOverlayStyle(statusBarColor: Colors.black));
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
@@ -61,13 +61,6 @@ class _AbsenscreenState extends State<Absenscreen> {
                                 children: <Widget>[
                                   SizedBox(
                                     height: 20,
-                                  ),
-                                  Center(
-                                    child: Text("Absen Details",
-                                        style: TextStyle(
-                                            fontSize: 24,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black)),
                                   ),
                                   SizedBox(height: 10),
                                   Container(
@@ -121,18 +114,27 @@ class _AbsenscreenState extends State<Absenscreen> {
                               ),
                             ]),
                             SizedBox(
-                              height: 4,
+                              height: 20,
                             ),
                             Container(
-                              color: Colors.blue,
+                              width: 370,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
                               child: Center(
-                                child: Text("Absen List",
+                                child: Text("ABSEN LIST",
                                     style: TextStyle(
+                                        letterSpacing: 5,
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black)),
                               ),
                             ),
+                            SizedBox(
+                              height: 20,
+                            )
                           ],
                         ),
                       );

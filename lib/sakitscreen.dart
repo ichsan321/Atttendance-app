@@ -9,6 +9,7 @@ import 'package:my_project/user.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
 double perpage = 1;
+int count = 0;
 
 class sakitscreen extends StatefulWidget {
   final User user;
@@ -37,7 +38,7 @@ class _sakitscreenState extends State<sakitscreen> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.blue));
+        SystemUiOverlayStyle(statusBarColor: Colors.black));
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
@@ -62,13 +63,13 @@ class _sakitscreenState extends State<sakitscreen> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  Center(
-                                    child: Text("Sakit Detail",
-                                        style: TextStyle(
-                                            fontSize: 24,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black)),
-                                  ),
+                                  // Center(
+                                  //   child: Text("Sakit Detail",
+                                  //       style: TextStyle(
+                                  //           fontSize: 24,
+                                  //           fontWeight: FontWeight.bold,
+                                  //           color: Colors.black)),
+                                  // ),
                                   SizedBox(height: 10),
                                   Container(
                                     width: 300,
@@ -121,22 +122,32 @@ class _sakitscreenState extends State<sakitscreen> {
                               ),
                             ]),
                             SizedBox(
-                              height: 4,
+                              height: 20,
                             ),
                             Container(
-                              color: Colors.blue,
+                              width: 370,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
                               child: Center(
-                                child: Text("Sakit List",
+                                child: Text("SAKIT LIST",
                                     style: TextStyle(
+                                        letterSpacing: 5,
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black)),
                               ),
                             ),
+                            SizedBox(
+                              height: 20,
+                            )
                           ],
                         ),
                       );
                     }
+
                     if (index == data!.length && perpage > 1) {
                       return Container(
                         width: 250,
@@ -150,81 +161,94 @@ class _sakitscreenState extends State<sakitscreen> {
                         ),
                       );
                     }
-                    index -= 1;
-                    return Padding(
-                      padding: EdgeInsets.all(2.0),
-                      child: Card(
-                        elevation: 2,
-                        child: InkWell(
-                          child: Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: Row(
-                              children: <Widget>[
-                                Expanded(
-                                  child: Container(
-                                    child: Column(
-                                      children: <Widget>[
-                                        Text(
-                                          "Sakit",
-                                          style: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        SizedBox(
-                                          height: 5.0,
-                                        ),
-                                        Text(
-                                            "Date : " +
-                                                data![index]['date']
-                                                    .toString()
-                                                    .toUpperCase(),
+                    if (data != null) {
+                      print("Test sakit");
+                      print(data);
+                      index -= 1;
+                      count = index + 1;
+                      return Padding(
+                        padding: EdgeInsets.all(2.0),
+                        child: Card(
+                          elevation: 2,
+                          child: InkWell(
+                            child: Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Row(
+                                children: <Widget>[
+                                  Expanded(
+                                    child: Container(
+                                      child: Column(
+                                        children: <Widget>[
+                                          Text(
+                                            count.toString(),
                                             style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold)),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                        Text("Keterangan : " +
-                                            data![index]['keterangan']),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                        (data![index]['Approve'].toString() ==
-                                                "Administrator")
-                                            ? Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          SizedBox(
+                                            height: 5.0,
+                                          ),
+                                          Text(
+                                              "Date : " +
+                                                  data![index]['date']
+                                                      .toString()
+                                                      .toUpperCase(),
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold)),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Text("Keterangan : " +
+                                              data![index]['keterangan']),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          (data![index]['Approve'].toString() ==
+                                                  "Administrator")
+                                              ? Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                      Text("Approve By : "),
+                                                      Text(
+                                                        data![index]['Approve'],
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.green),
+                                                      )
+                                                    ])
+                                              : Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
                                                     Text("Approve By : "),
                                                     Text(
-                                                      data![index]['Approve'],
+                                                      data![index]['Approve']
+                                                          .toString(),
                                                       style: TextStyle(
-                                                          color: Colors.green),
+                                                          color:
+                                                              Colors.red[100]),
                                                     )
-                                                  ])
-                                            : Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text("Approve By : "),
-                                                  Text(
-                                                    data![index]['Approve']
-                                                        .toString(),
-                                                    style: TextStyle(
-                                                        color: Colors.red[100]),
-                                                  )
-                                                ],
-                                              )
-                                      ],
+                                                  ],
+                                                )
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    );
+                      );
+                    } else {
+                      return Expanded(
+                        child: Container(
+                          child: Text("No Data"),
+                        ),
+                      );
+                    }
                   }),
             )));
   }

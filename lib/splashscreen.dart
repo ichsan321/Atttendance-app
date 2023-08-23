@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:my_project/loginscreen.dart';
+import 'package:my_project/test.dart';
 import 'package:toast/toast.dart';
 import 'dart:io';
 import 'package:my_project/constant.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+
+const double _kSize = 100;
 
 void main() {
   HttpOverrides.global = MyHttpOverrides();
@@ -31,7 +35,7 @@ class MyApp extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                new ProgressIndicator(),
+                new ProgressIndicator()
               ],
             ),
           ),

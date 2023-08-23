@@ -9,6 +9,7 @@ import 'package:progress_dialog/progress_dialog.dart';
 import 'package:my_project/constant.dart';
 
 double perpage = 1;
+int count = 0;
 
 class izinscreen extends StatefulWidget {
   final User user;
@@ -37,7 +38,7 @@ class _izinscreenState extends State<izinscreen> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.blue));
+        SystemUiOverlayStyle(statusBarColor: Colors.black));
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
@@ -49,6 +50,7 @@ class _izinscreenState extends State<izinscreen> {
                 //await refreshList();
               },
               child: ListView.builder(
+
                   //Step 6: Count the data
                   itemCount: data == null ? 1 : data!.length + 1,
                   itemBuilder: (context, index) {
@@ -62,13 +64,13 @@ class _izinscreenState extends State<izinscreen> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  Center(
-                                    child: Text("Izin Detail",
-                                        style: TextStyle(
-                                            fontSize: 24,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black)),
-                                  ),
+                                  // Center(
+                                  //   child: Text("Izin Detail",
+                                  //       style: TextStyle(
+                                  //           fontSize: 24,
+                                  //           fontWeight: FontWeight.bold,
+                                  //           color: Colors.black)),
+                                  // ),
                                   SizedBox(height: 10),
                                   Container(
                                     width: 300,
@@ -121,18 +123,27 @@ class _izinscreenState extends State<izinscreen> {
                               ),
                             ]),
                             SizedBox(
-                              height: 4,
+                              height: 20,
                             ),
                             Container(
-                              color: Colors.blue,
+                              width: 370,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
                               child: Center(
-                                child: Text("Izin List",
+                                child: Text("IZIN LIST",
                                     style: TextStyle(
+                                        letterSpacing: 5,
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black)),
                               ),
                             ),
+                            SizedBox(
+                              height: 20,
+                            )
                           ],
                         ),
                       );
@@ -150,85 +161,96 @@ class _izinscreenState extends State<izinscreen> {
                         ),
                       );
                     }
-                    index -= 1;
-                    return Padding(
-                      padding: EdgeInsets.all(2.0),
-                      child: Card(
-                        elevation: 2,
-                        child: InkWell(
-                          onLongPress: () => _onJobDelete(
-                              data![index]['id'].toString(),
-                              data![index]['date'].toString(),
-                              data![index]['keterangan'].toString(),
-                              data![index]['approve'].toString()),
-                          child: Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: Row(
-                              children: <Widget>[
-                                Expanded(
-                                  child: Container(
-                                    child: Column(
-                                      children: <Widget>[
-                                        Text(
-                                          "Izin",
-                                          style: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        SizedBox(
-                                          height: 5.0,
-                                        ),
-                                        Text(
-                                            "Date : " +
-                                                data![index]['date']
-                                                    .toString()
-                                                    .toUpperCase(),
+                    if (data!.isNotEmpty) {
+                      index -= 1;
+                      count = index + 1;
+
+                      return Padding(
+                        padding: EdgeInsets.all(2.0),
+                        child: Card(
+                          elevation: 2,
+                          child: InkWell(
+                            onLongPress: () => _onJobDelete(
+                                data![index]['id'].toString(),
+                                data![index]['date'].toString(),
+                                data![index]['keterangan'].toString(),
+                                data![index]['approve'].toString()),
+                            child: Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Row(
+                                children: <Widget>[
+                                  Expanded(
+                                    child: Container(
+                                      child: Column(
+                                        children: <Widget>[
+                                          Text(
+                                            count.toString(),
                                             style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold)),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                        Text("Keterangan : " +
-                                            data![index]['keterangan']),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                        (data![index]['aprove'].toString() ==
-                                                "Administrator")
-                                            ? Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text("Approve By : "),
-                                                  Text(
-                                                    data![index]['aprove'],
-                                                    style: TextStyle(
-                                                        color: Colors.green),
-                                                  )
-                                                ],
-                                              )
-                                            : Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          SizedBox(
+                                            height: 5.0,
+                                          ),
+                                          Text(
+                                              "Date : " +
+                                                  data![index]['date']
+                                                      .toString()
+                                                      .toUpperCase(),
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold)),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Text("Keterangan : " +
+                                              data![index]['keterangan']),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          (data![index]['aprove'].toString() ==
+                                                  "Administrator")
+                                              ? Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text("Approve By : "),
                                                     Text(
-                                                      "Approve By : ",
-                                                    ),
-                                                    Text(data![index]['aprove'],
-                                                        style: TextStyle(
-                                                            color: Colors.red))
-                                                  ])
-                                      ],
+                                                      data![index]['aprove'],
+                                                      style: TextStyle(
+                                                          color: Colors.green),
+                                                    )
+                                                  ],
+                                                )
+                                              : Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                      Text(
+                                                        "Approve By : ",
+                                                      ),
+                                                      Text(
+                                                          data![index]
+                                                              ['aprove'],
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.red))
+                                                    ])
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    );
+                      );
+                    } else {
+                      return Container(
+                        child: Text("No Data"),
+                      );
+                    }
                   }),
             )));
   }

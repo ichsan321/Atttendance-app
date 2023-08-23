@@ -38,7 +38,7 @@ class _cuti_adminState extends State<cuti_admin> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.blue));
+        SystemUiOverlayStyle(statusBarColor: Colors.black));
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
@@ -62,13 +62,6 @@ class _cuti_adminState extends State<cuti_admin> {
                                 children: <Widget>[
                                   SizedBox(
                                     height: 20,
-                                  ),
-                                  Center(
-                                    child: Text("Cuti Detail",
-                                        style: TextStyle(
-                                            fontSize: 24,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black)),
                                   ),
                                   SizedBox(height: 10),
                                   Container(
@@ -122,18 +115,27 @@ class _cuti_adminState extends State<cuti_admin> {
                               ),
                             ]),
                             SizedBox(
-                              height: 4,
+                              height: 20,
                             ),
                             Container(
-                              color: Colors.blue,
+                              width: 370,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
                               child: Center(
-                                child: Text("Cuti List",
+                                child: Text("LIST CUTI ALL USER",
                                     style: TextStyle(
+                                        letterSpacing: 5,
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black)),
                               ),
                             ),
+                            SizedBox(
+                              height: 20,
+                            )
                           ],
                         ),
                       );
@@ -319,7 +321,7 @@ class _cuti_adminState extends State<cuti_admin> {
 
   Future init() async {
     this.makeRequest();
-    _getCurrentLocation();
+    // _getCurrentLocation();
   }
 
   void onAccepted(String id, String name, String email, String dateawal,

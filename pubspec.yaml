@@ -47,6 +47,7 @@ dependencies:
   flutter_slidable:
   encrypt: ^5.0.1
   random_string: ^1.1.0
+  loading_animation_widget: ^1.2.0+4
 
 dev_dependencies:
   flutter_test:

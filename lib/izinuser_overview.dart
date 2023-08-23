@@ -8,6 +8,7 @@ import 'package:my_project/user.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
 double perpage = 1;
+int count = 0;
 
 class izinuseroverview extends StatefulWidget {
   final User user;
@@ -97,6 +98,7 @@ class _cutipegawaiadminState extends State<izinuseroverview> {
                   );
                 }
                 index -= 1;
+                count = index + 1;
                 return Padding(
                   padding: EdgeInsets.all(2.0),
                   child: Card(
@@ -110,7 +112,7 @@ class _cutipegawaiadminState extends State<izinuseroverview> {
                               child: Container(
                                 child: Column(children: <Widget>[
                                   Text(
-                                    data![index]['name'].toString(),
+                                    count.toString(),
                                     style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold),

@@ -64,13 +64,13 @@ class _izin_adminState extends State<izin_admin> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  Center(
-                                    child: Text("Izin Pegawai",
-                                        style: TextStyle(
-                                            fontSize: 24,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black)),
-                                  ),
+                                  // Center(
+                                  //   child: Text("Izin Pegawai",
+                                  //       style: TextStyle(
+                                  //           fontSize: 24,
+                                  //           fontWeight: FontWeight.bold,
+                                  //           color: Colors.black)),
+                                  // ),
                                   SizedBox(height: 10),
                                   Container(
                                     width: 300,
@@ -123,18 +123,27 @@ class _izin_adminState extends State<izin_admin> {
                               ),
                             ]),
                             SizedBox(
-                              height: 4,
+                              height: 20,
                             ),
                             Container(
-                              color: Colors.blue,
+                              width: 370,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
                               child: Center(
-                                child: Text("Izin Pegawai List",
+                                child: Text("LIST IZIN ALL USER",
                                     style: TextStyle(
+                                        letterSpacing: 5,
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black)),
                               ),
                             ),
+                            SizedBox(
+                              height: 20,
+                            )
                           ],
                         ),
                       );

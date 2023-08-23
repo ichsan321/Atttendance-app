@@ -8,6 +8,7 @@ import 'package:my_project/user.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
 double perpage = 1;
+int count = 0;
 
 class cutiscreen extends StatefulWidget {
   final User user;
@@ -36,7 +37,7 @@ class _cutiscreenState extends State<cutiscreen> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.blue));
+        SystemUiOverlayStyle(statusBarColor: Colors.black));
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
@@ -61,13 +62,13 @@ class _cutiscreenState extends State<cutiscreen> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  Center(
-                                    child: Text("Cuti Detail",
-                                        style: TextStyle(
-                                            fontSize: 24,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black)),
-                                  ),
+                                  // Center(
+                                  //   child: Text("Cuti Detail",
+                                  //       style: TextStyle(
+                                  //           fontSize: 24,
+                                  //           fontWeight: FontWeight.bold,
+                                  //           color: Colors.black)),
+                                  // ),
                                   SizedBox(height: 10),
                                   Container(
                                     width: 300,
@@ -120,18 +121,27 @@ class _cutiscreenState extends State<cutiscreen> {
                               ),
                             ]),
                             SizedBox(
-                              height: 4,
+                              height: 20,
                             ),
                             Container(
-                              color: Colors.blue,
+                              width: 370,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
                               child: Center(
-                                child: Text("Cuti List",
+                                child: Text("CUTI LIST",
                                     style: TextStyle(
+                                        letterSpacing: 5,
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black)),
                               ),
                             ),
+                            SizedBox(
+                              height: 20,
+                            )
                           ],
                         ),
                       );
@@ -150,6 +160,7 @@ class _cutiscreenState extends State<cutiscreen> {
                       );
                     }
                     index -= 1;
+                    count = index + 1;
                     return Padding(
                       padding: EdgeInsets.all(2.0),
                       child: Card(
@@ -163,7 +174,7 @@ class _cutiscreenState extends State<cutiscreen> {
                                   child: Container(
                                     child: Column(children: <Widget>[
                                       Text(
-                                        "Cuti",
+                                        count.toString(),
                                         style: TextStyle(
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold),

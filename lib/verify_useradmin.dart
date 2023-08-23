@@ -39,7 +39,7 @@ class _verify_useradminState extends State<verify_useradmin> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.blue));
+        SystemUiOverlayStyle(statusBarColor: Colors.black));
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: RefreshIndicator(
