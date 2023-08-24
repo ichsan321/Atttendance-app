@@ -50,7 +50,6 @@ class _homepage_adminState extends State<homepage_admin> {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle(statusBarColor: Colors.black));
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: RefreshIndicator(
@@ -372,10 +371,12 @@ class _homepage_adminState extends State<homepage_admin> {
                                 "Absen Pegawai Hari ini             ",
                                 style: TextStyle(fontSize: 12),
                               ),
-                              Text(" Total : " + data!.length.toString(),
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ))
+                              // (data!.length > 0)
+                              //     ? Text(" Total : " + data!.length.toString(),
+                              //         style: TextStyle(
+                              //           fontWeight: FontWeight.bold,
+                              //         ))
+                              //     : Text("Total :")
                             ],
                           ),
                         )
@@ -544,7 +545,9 @@ class _homepage_adminState extends State<homepage_admin> {
     ProgressDialog pr = new ProgressDialog(context,
         type: ProgressDialogType.Normal, isDismissible: false);
     pr.style(message: "Load absen list");
+    pr.style(maxProgress: 5.0);
     pr.show();
+
     http.post(Uri.parse(urlLoadAbsen), body: {}).then((res) {
       setState(() {
         var extractdata = json.decode(res.body);

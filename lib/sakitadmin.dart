@@ -36,7 +36,7 @@ class _cutipegawaiadminState extends State<sakitpegawaiadmin> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.blue));
+        SystemUiOverlayStyle(statusBarColor: Colors.black));
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: RefreshIndicator(
@@ -63,9 +63,9 @@ class _cutipegawaiadminState extends State<sakitpegawaiadmin> {
                                 Center(
                                   child: Text("Sakit Pegawai History",
                                       style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black)),
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      )),
                                 ),
                                 SizedBox(height: 10),
                               ],

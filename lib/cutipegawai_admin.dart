@@ -36,7 +36,7 @@ class _cutipegawaiadminState extends State<cutipegawaiadmin> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.blue));
+        SystemUiOverlayStyle(statusBarColor: Colors.black));
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: RefreshIndicator(

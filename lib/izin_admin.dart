@@ -39,7 +39,7 @@ class _izin_adminState extends State<izin_admin> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.blue));
+        SystemUiOverlayStyle(statusBarColor: Colors.black));
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
