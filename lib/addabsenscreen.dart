@@ -215,7 +215,7 @@ class _addabsenscreenState extends State<addabsenscreen> {
 
     selectedValue = selectedValue.toString();
 
-    if ((selectedValue != null && selectedValue == 'Wisma BSG')) {
+    if ((selectedValue != null)) {
       ProgressDialog pr = new ProgressDialog(context,
           type: ProgressDialogType.Normal, isDismissible: false);
 
