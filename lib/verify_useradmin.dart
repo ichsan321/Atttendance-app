@@ -64,7 +64,7 @@ class _verify_useradminState extends State<verify_useradmin> {
                                   height: 20,
                                 ),
                                 Center(
-                                  child: Text("USER VERIFICATION LIST",
+                                  child: Text("User Verification List",
                                       style: TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold,
@@ -121,7 +121,7 @@ class _verify_useradminState extends State<verify_useradmin> {
                                       height: 5.0,
                                     ),
                                     Text(
-                                        "Name : " +
+                                        "Nama : " +
                                             data![index]['NAME']
                                                 .toString()
                                                 .toUpperCase(),
