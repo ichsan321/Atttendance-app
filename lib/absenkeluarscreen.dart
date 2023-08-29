@@ -169,7 +169,7 @@ class _absenKeluarState extends State<absenKeluar> {
                           child: InkWell(
                             onTap: (_onabsenKeluar),
                             child: Center(
-                              child: Text("Keluar",
+                              child: Text("KELUAR",
                                   style: TextStyle(
                                       color: Colors.white, // LOGIN Name
                                       fontFamily: "Poppins-Bold",

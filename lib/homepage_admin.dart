@@ -68,7 +68,7 @@ class _homepage_adminState extends State<homepage_admin> {
                       Stack(children: <Widget>[
                         Padding(
                           padding: EdgeInsets.only(
-                              left: 200, right: 10, top: 30, bottom: 10),
+                              left: 200, right: 10, top: 20, bottom: 10),
                           child: Container(
                             height: 80,
                             width: 200,
@@ -97,8 +97,8 @@ class _homepage_adminState extends State<homepage_admin> {
                                   child: GestureDetector(
                                     onTap: _takePicture,
                                     child: Container(
-                                        width: 50.0,
-                                        height: 50.0,
+                                        width: 40.0,
+                                        height: 40.0,
                                         decoration: new BoxDecoration(
                                           image: new DecorationImage(
                                               image: AssetImage(
@@ -605,18 +605,18 @@ class _homepage_adminState extends State<homepage_admin> {
     //       duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
     //   return;
     // }
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        // return object of type Dialog
-        return AlertDialog(
-            title: new Text("Take new profile picture?"),
-            content: new Text("Are your sure?"),
-            actions: <Widget>[
-              // usually buttons at the bottom of the dialog
-            ]);
-      },
-    );
+    // showDialog(
+    //   context: context,
+    //   builder: (BuildContext context) {
+    //     // return object of type Dialog
+    //     return AlertDialog(
+    //         title: new Text("Take new profile picture?"),
+    //         content: new Text("Are your sure?"),
+    //         actions: <Widget>[
+    //           // usually buttons at the bottom of the dialog
+    //         ]);
+    //   },
+    // );
   }
 
   void _izinbutton() async {
