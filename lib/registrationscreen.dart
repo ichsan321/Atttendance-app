@@ -22,6 +22,7 @@ final TextEditingController _phcontroller = TextEditingController();
 final TextEditingController _jabatancontroller = TextEditingController();
 // final TextEditingController _verificationcontroller = TextEditingController();
 String? _name, _email, _password, _phone, _jabatan;
+bool passwordVisible = false;
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -33,6 +34,7 @@ class _RegisterUserState extends State<RegisterScreen> {
   @override
   void initState() {
     super.initState();
+    passwordVisible = true;
   }
 
   @override
@@ -86,8 +88,8 @@ class RegisterWidgetState extends State<RegisterWidget> {
         GestureDetector(
             onTap: () => mainBottomSheet(context),
             child: Container(
-              width: 180,
-              height: 200,
+              width: 150,
+              height: 150,
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
@@ -98,6 +100,9 @@ class RegisterWidgetState extends State<RegisterWidget> {
                   )),
             )),
         Text('Click on image above to take profile picture'),
+        SizedBox(
+          height: 20.0,
+        ),
         TextField(
           controller: _emcontroller,
           decoration: InputDecoration(
@@ -162,6 +167,18 @@ class RegisterWidgetState extends State<RegisterWidget> {
           controller: _passcontroller,
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.all(16.0),
+            suffixIcon: IconButton(
+              color: Colors.black,
+              icon: Icon(
+                  passwordVisible ? Icons.visibility : Icons.visibility_off),
+              onPressed: () {
+                setState(
+                  () {
+                    passwordVisible = !passwordVisible;
+                  },
+                );
+              },
+            ),
             prefixIcon: Container(
                 padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
                 margin: const EdgeInsets.only(right: 8.0),
@@ -184,7 +201,7 @@ class RegisterWidgetState extends State<RegisterWidget> {
             filled: true,
             fillColor: Colors.cyan.withOpacity(0.8),
           ),
-          obscureText: true,
+          obscureText: passwordVisible,
         ),
         SizedBox(
           height: 5,
@@ -408,19 +425,24 @@ class RegisterWidgetState extends State<RegisterWidget> {
           _jabatancontroller.text = '';
           pr.hide();
           Toast.show(
-              "Your Registration Is Succesfully, Please inform to the admin to verified",
+              "Pendaftaran Akun Kamu Telah Berhasil, Silahkan Beritahu Kepada Administrator Untuk Mengaktifkan Akun Anda",
               context,
               duration: 3,
-              gravity: Toast.BOTTOM,
+              gravity: Toast.TOP,
               backgroundColor: Colors.red);
 
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                   builder: (BuildContext context) => LoginPage()));
-        } else if (res.body == "failed") {
-          Toast.show("There is some trouble with connection", context,
-              duration: 3, gravity: Toast.BOTTOM, backgroundColor: Colors.red);
+        } else if (res.body == "failed2") {
+          Toast.show(
+              "Mohon Maaf Ada Masalah Dengan Koneksi Interner Anda", context,
+              duration: 3, gravity: Toast.TOP, backgroundColor: Colors.red);
+          pr.hide();
+        } else if (res.body == "failed1") {
+          Toast.show("Email Yang Anda Gunakan Telah Di Gunakan", context,
+              duration: 5, gravity: Toast.TOP, backgroundColor: Colors.red);
           pr.hide();
         }
       }).catchError((err) {

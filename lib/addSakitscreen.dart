@@ -69,7 +69,7 @@ class _addSakitState extends State<addSakit> {
                       print(
                           pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
                       String formattedDate =
-                          DateFormat('yyyy-MM-dd').format(pickedDate);
+                          DateFormat('dd-MM-yyyy').format(pickedDate);
                       print(
                           formattedDate); //formatted date output using intl package =>  2021-03-16
                       //you can implement different kind of Date Format here according to your requirement
@@ -86,12 +86,13 @@ class _addSakitState extends State<addSakit> {
                 SizedBox(
                   height: 10.0,
                 ),
-                TextField(
+                TextFormField(
+                  maxLines: 7,
                   controller: sakitinput,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.all(16.0),
                     prefixIcon: Container(
-                        padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
+                        padding: const EdgeInsets.only(top: 85.0, bottom: 85.0),
                         margin: const EdgeInsets.only(right: 8.0),
                         decoration: BoxDecoration(
                             color: Colors.black,
@@ -131,7 +132,7 @@ class _addSakitState extends State<addSakit> {
                       )),
                     )),
                 SizedBox(
-                  height: 350.0,
+                  height: 250.0,
                 ),
                 InkWell(
                   child: Container(

@@ -66,7 +66,7 @@ class _addcutiState extends State<addcuti> {
                       print(
                           pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
                       String formattedDate =
-                          DateFormat('yyyy-MM-dd').format(pickedDate);
+                          DateFormat('dd-MM-yyyy').format(pickedDate);
                       print(
                           formattedDate); //formatted date output using intl package =>  2021-03-16
                       //you can implement different kind of Date Format here according to your requirement
@@ -101,7 +101,7 @@ class _addcutiState extends State<addcuti> {
                       print(
                           pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
                       String formattedDate =
-                          DateFormat('yyyy-MM-dd').format(pickedDate);
+                          DateFormat('dd-MM-yyyy').format(pickedDate);
                       print(
                           formattedDate); //formatted date output using intl package =>  2021-03-16
                       //you can implement different kind of Date Format here according to your requirement
@@ -118,12 +118,13 @@ class _addcutiState extends State<addcuti> {
                 SizedBox(
                   height: 10.0,
                 ),
-                TextField(
+                TextFormField(
+                  maxLines: 7,
                   controller: cutiinput,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.all(16.0),
                     prefixIcon: Container(
-                        padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
+                        padding: const EdgeInsets.only(top: 85.0, bottom: 85.0),
                         margin: const EdgeInsets.only(right: 8.0),
                         decoration: BoxDecoration(
                             color: Colors.black,
@@ -146,7 +147,7 @@ class _addcutiState extends State<addcuti> {
                   ),
                 ),
                 SizedBox(
-                  height: 400.0,
+                  height: 290.0,
                 ),
                 InkWell(
                   child: Container(
@@ -232,7 +233,7 @@ class _addcutiState extends State<addcuti> {
                       )));
         } else if (res.body == "failed") {
           Toast.show("There is some trouble with connection", context,
-              duration: 3, gravity: Toast.BOTTOM, backgroundColor: Colors.red);
+              duration: 3, gravity: Toast.TOP, backgroundColor: Colors.red);
           pr.hide();
         }
       }).catchError((err) {
@@ -240,7 +241,7 @@ class _addcutiState extends State<addcuti> {
       });
     } else {
       Toast.show(" Please input the column", context,
-          duration: 3, gravity: Toast.BOTTOM);
+          duration: 3, gravity: Toast.TOP);
     }
   }
 }

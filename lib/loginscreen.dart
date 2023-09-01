@@ -33,11 +33,13 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool passwordVisible = false;
   @override
   void initState() {
     //  loadpref();
     print('Init: $_email');
     super.initState();
+    passwordVisible = true;
   }
 
   @override
@@ -97,6 +99,19 @@ class _LoginPageState extends State<LoginPage> {
                   controller: _passcontroller,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.all(16.0),
+                    suffixIcon: IconButton(
+                      color: Colors.black,
+                      icon: Icon(passwordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off),
+                      onPressed: () {
+                        setState(
+                          () {
+                            passwordVisible = !passwordVisible;
+                          },
+                        );
+                      },
+                    ),
                     prefixIcon: Container(
                         padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
                         margin: const EdgeInsets.only(right: 8.0),
@@ -119,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
                     filled: true,
                     fillColor: Colors.cyan.withOpacity(0.8),
                   ),
-                  obscureText: true,
+                  obscureText: passwordVisible,
                 ),
                 SizedBox(
                   height: 10,
@@ -253,10 +268,15 @@ class _LoginPageState extends State<LoginPage> {
               sisa: dres[9]);
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => Maincsreen(user: user)));
-        } else if (dres[0] == "failed") {
+        } else if (dres[0] == "failed1") {
           Toast.show(
-              "Please verify your account first with Administrator", context,
-              duration: 5, gravity: Toast.BOTTOM, backgroundColor: Colors.red);
+              "Mohon Maaf Password Yang Anda Masukkan Itu Salah", context,
+              duration: 6, gravity: Toast.TOP, backgroundColor: Colors.red);
+          pr.hide();
+        } else if (dres[0] == "failed2") {
+          Toast.show("Tolong Verifikasi Email Anda Dahulu Kepada Administrator",
+              context,
+              duration: 6, gravity: Toast.TOP, backgroundColor: Colors.red);
           pr.hide();
         }
       }).catchError((err) {

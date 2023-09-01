@@ -121,7 +121,7 @@ class _absenKeluarState extends State<absenKeluar> {
                         contentPadding: const EdgeInsets.all(10.0),
                         prefixIcon: Container(
                             padding:
-                                const EdgeInsets.only(top: 80.0, bottom: 16.0),
+                                const EdgeInsets.only(top: 45.0, bottom: 45.0),
                             margin: const EdgeInsets.only(right: 8.0),
                             decoration: BoxDecoration(
                                 color: Colors.black,

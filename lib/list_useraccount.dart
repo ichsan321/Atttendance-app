@@ -103,8 +103,8 @@ class _list_useraccountState extends State<list_useraccount> {
                               Text(data1![index]['JABATAN'].toUpperCase()),
                           trailing: InkWell(
                               onTap: () => onDeleted(
-                                    data![index]['Id'].toString(),
-                                    data![index]['NAME'].toString(),
+                                    data1![index]['Id'].toString(),
+                                    data1![index]['NAME'].toString(),
                                   ),
                               child: Icon(Icons.delete_outline)),
                         ),
@@ -195,7 +195,9 @@ class _list_useraccountState extends State<list_useraccount> {
     String id,
     String name,
   ) {
-    print("this is accepted button ");
+    print("this is deleted button ");
+    print(id);
+    print(name);
     _showDialog(id, name);
   }
 

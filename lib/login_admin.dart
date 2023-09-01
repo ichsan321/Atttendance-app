@@ -37,11 +37,13 @@ class MyadminPage extends StatefulWidget {
 }
 
 class _MyadminPageState extends State<MyadminPage> {
+  bool passwordVisible = false;
   @override
   void initState() {
     //  loadpref();
     print('Init: $_email');
     super.initState();
+    passwordVisible = true;
   }
 
   @override
@@ -101,6 +103,19 @@ class _MyadminPageState extends State<MyadminPage> {
                   controller: _passcontroller,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.all(16.0),
+                    suffixIcon: IconButton(
+                      color: Colors.black,
+                      icon: Icon(passwordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off),
+                      onPressed: () {
+                        setState(
+                          () {
+                            passwordVisible = !passwordVisible;
+                          },
+                        );
+                      },
+                    ),
                     prefixIcon: Container(
                         padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
                         margin: const EdgeInsets.only(right: 8.0),
@@ -123,7 +138,7 @@ class _MyadminPageState extends State<MyadminPage> {
                     filled: true,
                     fillColor: Colors.cyan.withOpacity(0.8),
                   ),
-                  obscureText: true,
+                  obscureText: passwordVisible,
                 ),
                 SizedBox(
                   height: 10,
