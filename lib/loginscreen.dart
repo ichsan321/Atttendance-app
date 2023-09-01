@@ -251,7 +251,7 @@ class _LoginPageState extends State<LoginPage> {
         List dres = string.split(",");
         print(dres);
         Toast.show(dres[0], context,
-            duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+            duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
         if (dres[0] == "success") {
           pr.hide();
           // print("Radius:");

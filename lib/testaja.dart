@@ -1,88 +1,161 @@
-import 'package:flutter/material.dart';
+// import 'dart:io';
 
-/// Flutter code sample for [FutureBuilder].
+// import 'package:flutter/material.dart';
+// import 'dart:async';
 
-void main() => runApp(const FutureBuilderExampleApp());
+// import 'package:flutter/services.dart';
+// import 'package:device_imei/device_imei.dart';
+// import 'package:permission_handler/permission_handler.dart';
 
-class FutureBuilderExampleApp extends StatelessWidget {
-  const FutureBuilderExampleApp({super.key});
+// void main() {
+//   runApp(const MyApp());
+// }
 
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      color: Colors.white,
-      home: FutureBuilderExample(),
-    );
-  }
-}
+// class MyApp extends StatefulWidget {
+//   const MyApp({super.key});
 
-class FutureBuilderExample extends StatefulWidget {
-  const FutureBuilderExample({super.key});
+//   @override
+//   State<MyApp> createState() => _MyAppState();
+// }
 
-  @override
-  State<FutureBuilderExample> createState() => _FutureBuilderExampleState();
-}
+// class _MyAppState extends State<MyApp> {
+//   String _platformVersion = 'Unknown';
+//   String? deviceImei;
+//   String? type;
+//   String message = "Please allow permission request!";
+//   DeviceInfo? deviceInfo;
+//   bool getPermission = false;
+//   bool isloading = false;
+//   final _deviceImeiPlugin = DeviceImei();
 
-class _FutureBuilderExampleState extends State<FutureBuilderExample> {
-  final Future<String> _calculation = Future<String>.delayed(
-    const Duration(seconds: 2),
-    () => 'Data Loaded',
-  );
+//   @override
+//   void initState() {
+//     super.initState();
+//     initPlatformState();
+//     _setPlatformType();
+//     _getImei();
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return DefaultTextStyle(
-      style: Theme.of(context).textTheme.displayMedium!,
-      textAlign: TextAlign.center,
-      child: FutureBuilder<String>(
-        future: _calculation, // a previously-obtained Future<String> or null
-        builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-          List<Widget> children;
-          if (snapshot.hasData) {
-            children = <Widget>[
-              const Icon(
-                Icons.check_circle_outline,
-                color: Colors.green,
-                size: 60,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 16),
-                child: Text('Result: ${snapshot.data}'),
-              ),
-            ];
-          } else if (snapshot.hasError) {
-            children = <Widget>[
-              const Icon(
-                Icons.error_outline,
-                color: Colors.red,
-                size: 60,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 16),
-                child: Text('Error: ${snapshot.error}'),
-              ),
-            ];
-          } else {
-            children = const <Widget>[
-              SizedBox(
-                width: 60,
-                height: 60,
-                child: CircularProgressIndicator(),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 16),
-                child: Text('Awaiting result...'),
-              ),
-            ];
-          }
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: children,
-            ),
-          );
-        },
-      ),
-    );
-  }
-}
+//   _setPlatformType() {
+//     if (Platform.isAndroid) {
+//       setState(() {
+//         type = 'Android';
+//       });
+//     } else if (Platform.isIOS) {
+//       setState(() {
+//         type = 'iOS';
+//       });
+//     } else {
+//       setState(() {
+//         type = 'other';
+//       });
+//     }
+//   }
+
+//   _getImei() async {
+//     var permission = await Permission.phone.status;
+
+//     DeviceInfo? dInfo = await _deviceImeiPlugin.getDeviceInfo();
+
+//     if (dInfo != null) {
+//       setState(() {
+//         deviceInfo = dInfo;
+//       });
+//     }
+
+//     if (Platform.isAndroid) {
+//       if (permission.isGranted) {
+//         String? imei = await _deviceImeiPlugin.getDeviceImei();
+//         if (imei != null) {
+//           setState(() {
+//             getPermission = true;
+//             deviceImei = imei;
+//           });
+//         }
+//       } else {
+//         PermissionStatus status = await Permission.phone.request();
+//         if (status == PermissionStatus.granted) {
+//           setState(() {
+//             getPermission = false;
+//           });
+//           _getImei();
+//         } else {
+//           setState(() {
+//             getPermission = false;
+//             message = "Permission not granted, please allow permission";
+//           });
+//         }
+//       }
+//     } else {
+//       String? imei = await _deviceImeiPlugin.getDeviceImei();
+//       if (imei != null) {
+//         setState(() {
+//           getPermission = true;
+//           deviceImei = imei;
+//         });
+//       }
+//     }
+//   }
+
+//   // Platform messages are asynchronous, so we initialize in an async method.
+//   Future<void> initPlatformState() async {
+//     String platformVersion;
+//     // Platform messages may fail, so we use a try/catch PlatformException.
+//     // We also handle the message potentially returning null.
+//     try {
+//       platformVersion = await _deviceImeiPlugin.getPlatformVersion() ??
+//           'Unknown platform version';
+//     } on PlatformException {
+//       platformVersion = 'Failed to get platform version.';
+//     }
+
+//     // If the widget was removed from the tree while the asynchronous platform
+//     // message was in flight, we want to discard the reply rather than calling
+//     // setState to update our non-existent appearance.
+//     if (!mounted) return;
+
+//     setState(() {
+//       _platformVersion = platformVersion;
+//     });
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: Scaffold(
+//         appBar: AppBar(
+//           title: const Text('Plugin example app'),
+//         ),
+//         body: Center(
+//           child: Column(
+//             crossAxisAlignment: CrossAxisAlignment.center,
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             children: [
+//               Text('Running on: $_platformVersion\n'),
+//               const Divider(),
+//               Text("ID : ${deviceInfo?.deviceId}"),
+//               Text("SDK INT : ${deviceInfo?.sdkInt}"),
+//               Text("MODEL : ${deviceInfo?.model}"),
+//               Text("MANUFACTURE : ${deviceInfo?.manufacture}"),
+//               Text("DEVICE : ${deviceInfo?.device}"),
+//               const Divider(),
+//               isloading
+//                   ? const CircularProgressIndicator()
+//                   : getPermission
+//                       ? Text('Device $type: $deviceImei\n')
+//                       : Text(message),
+//               Container(
+//                 padding: const EdgeInsets.all(20.0),
+//                 width: double.infinity,
+//                 child: ElevatedButton(
+//                   onPressed: _getImei,
+//                   child: const Text("Get Device Info"),
+//                 ),
+//               ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }

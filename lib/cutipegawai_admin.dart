@@ -102,14 +102,16 @@ class _cutipegawaiadminState extends State<cutipegawaiadmin> {
                     elevation: 2,
                     child: InkWell(
                       child: Padding(
-                        padding: const EdgeInsets.all(2.0),
+                        padding: const EdgeInsets.all(10.0),
                         child: Row(
                           children: <Widget>[
                             Expanded(
                               child: Container(
                                 child: Column(children: <Widget>[
                                   Text(
-                                    data![index]['name'].toString(),
+                                    data![index]['name']
+                                        .toString()
+                                        .toUpperCase(),
                                     style: TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold),
@@ -117,25 +119,40 @@ class _cutipegawaiadminState extends State<cutipegawaiadmin> {
                                   SizedBox(
                                     height: 5.0,
                                   ),
-                                  Text(
-                                      "Date : " +
-                                          data![index]['dateawal']
-                                              .toString()
-                                              .toUpperCase(),
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold)),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 80),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                            data![index]['dateawal']
+                                                .toString()
+                                                .toUpperCase(),
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold)),
+                                        Text("-",
+                                            style: TextStyle(
+                                                fontSize: 25,
+                                                fontWeight: FontWeight.bold)),
+                                        Text(
+                                            data![index]['dateakhir']
+                                                .toString()
+                                                .toUpperCase(),
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold)),
+                                      ],
+                                    ),
+                                  ),
                                   SizedBox(
                                     height: 5.0,
                                   ),
-                                  Text(
-                                      "Date : " +
-                                          data![index]['dateakhir']
-                                              .toString()
-                                              .toUpperCase(),
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold)),
+                                  Text("Total Cuti : " +
+                                      data![index]['totalcuti'].toString() +
+                                      " Hari"),
                                   SizedBox(
                                     height: 5,
                                   ),
