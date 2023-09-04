@@ -61,7 +61,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
         ),
         leading: IconButton(
           icon: new Icon(Icons.arrow_back_ios, color: Colors.white),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Navigator.pop(context, true),
         ),
       ),
       body: SingleChildScrollView(

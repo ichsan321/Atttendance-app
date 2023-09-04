@@ -14,6 +14,7 @@ import 'package:my_project/user.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:my_project/userprofile.dart';
 import 'absenkeluarscreen.dart';
+import 'dart:math';
 
 class profilescreen extends StatefulWidget {
   final User user;
@@ -28,12 +29,14 @@ class _profilescreenState extends State<profilescreen> {
   late Position _currentPosition;
   String _currentAddress = " Searching cureent location";
   List? data;
+  int number = 0;
   ThemeMode _themeMode = ThemeMode.system;
 
   @override
   void initState() {
     super.initState();
     _getCurrentLocation();
+    number = new Random().nextInt(100);
   }
 
   @override
@@ -86,7 +89,7 @@ class _profilescreenState extends State<profilescreen> {
                                 decoration: new BoxDecoration(
                                   image: new DecorationImage(
                                       image: NetworkImage(
-                                          "https://myattendance-test.000webhostapp.com/profile/${widget.user.email}"),
+                                          "https://myattendance-test.000webhostapp.com/profile/${widget.user.email}?dummy=${(number)}'"),
                                       fit: BoxFit.fill),
                                   shape: BoxShape.circle,
                                   border: Border.all(color: Colors.black),
