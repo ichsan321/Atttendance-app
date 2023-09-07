@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:my_project/mainscreen.dart';
 import 'package:my_project/user.dart';
+import 'dart:convert';
+import 'dart:io';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:http/http.dart' as http;
 import 'package:toast/toast.dart';
@@ -21,11 +24,12 @@ class _addcutiState extends State<addcuti> {
   TextEditingController cutiinput = TextEditingController();
   TextEditingController startdateinput = TextEditingController();
   TextEditingController enddateinput = TextEditingController();
+  String startcal = "";
+  String endcal = "";
   @override
   void initState() {
     startdateinput.text = "";
     enddateinput.text = "";
-
     //set the initial value of text field
     super.initState();
   }
@@ -50,7 +54,7 @@ class _addcutiState extends State<addcuti> {
                       startdateinput, //editing controller of this TextField
                   decoration: InputDecoration(
                       icon: Icon(Icons.calendar_today), //icon of text field
-                      labelText: "Start Date" //label text of field
+                      labelText: "Enter Date" //label text of field
                       ),
                   readOnly:
                       true, //set it true, so that user will not able to edit text
@@ -66,14 +70,17 @@ class _addcutiState extends State<addcuti> {
                       print(
                           pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
                       String formattedDate =
+                          DateFormat('yyyy-MM-dd').format(pickedDate);
+                      String formattedDatecal =
                           DateFormat('dd-MM-yyyy').format(pickedDate);
                       print(
                           formattedDate); //formatted date output using intl package =>  2021-03-16
                       //you can implement different kind of Date Format here according to your requirement
 
                       setState(() {
-                        startdateinput.text =
-                            formattedDate; //set output date to TextField value.
+                        startdateinput.text = formattedDatecal;
+                        startcal = formattedDate;
+                        //set output date to TextField value.
                       });
                     } else {
                       print("Date is not selected");
@@ -101,14 +108,19 @@ class _addcutiState extends State<addcuti> {
                       print(
                           pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
                       String formattedDate =
+                          DateFormat('yyyy-MM-dd').format(pickedDate);
+
+                      String formattedDatecal =
                           DateFormat('dd-MM-yyyy').format(pickedDate);
+
                       print(
                           formattedDate); //formatted date output using intl package =>  2021-03-16
                       //you can implement different kind of Date Format here according to your requirement
 
                       setState(() {
                         enddateinput.text =
-                            formattedDate; //set output date to TextField value.
+                            formattedDatecal; //set output date to TextField value.
+                        endcal = formattedDate;
                       });
                     } else {
                       print("Date is not selected");
@@ -199,13 +211,13 @@ class _addcutiState extends State<addcuti> {
     print(startdateinput.text);
     print(enddateinput.text);
 
-    DateTime awal = DateTime.parse(startdateinput.text);
-    DateTime akhir = DateTime.parse(enddateinput.text);
+    DateTime awal = DateTime.parse(startcal);
+    DateTime akhir = DateTime.parse(endcal);
     Duration diff = akhir.difference(awal);
     print(diff.inDays + 1);
 
-    if ((startdateinput.text.length > 5 &&
-        enddateinput.text.length > 5 &&
+    if ((startcal.length > 5 &&
+        endcal.length > 5 &&
         cutiinput.text.length > 5)) {
       ProgressDialog pr = new ProgressDialog(context,
           type: ProgressDialogType.Normal, isDismissible: false);
@@ -214,8 +226,8 @@ class _addcutiState extends State<addcuti> {
       http.post(Uri.parse(urlUpload), body: {
         'email': widget.user.email,
         'name': widget.user.name,
-        'dateawal': (startdateinput.text).toString(),
-        'dateakhir': (enddateinput.text).toString(),
+        'dateawal': (startcal).toString(),
+        'dateakhir': (endcal).toString(),
         'keterangan': cutiinput.text,
         'totalcuti': (diff.inDays + 1).toString(),
       }).then((res) {
