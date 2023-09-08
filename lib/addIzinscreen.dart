@@ -231,7 +231,7 @@ class _AddIzinState extends State<AddIzin> {
     print(widget.user.name);
     print(keteranganizin.text);
 
-    if ((dateinput.text.length > 5 && keteranganizin.text.length > 5)) {
+    if ((dateinput.text.length > 5 && keteranganizin.text.length > 4)) {
       ProgressDialog pr = new ProgressDialog(context,
           type: ProgressDialogType.Normal, isDismissible: false);
       pr.style(message: "in progress");

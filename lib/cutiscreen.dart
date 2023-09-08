@@ -202,6 +202,16 @@ class _cutiscreenState extends State<cutiscreen> {
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold)),
                                       SizedBox(
+                                        height: 5.0,
+                                      ),
+                                      Text(
+                                          "Cuti : " +
+                                              data![index]['totalcuti'] +
+                                              " Hari".toString().toUpperCase(),
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold)),
+                                      SizedBox(
                                         height: 5,
                                       ),
                                       Text("Keterangan : " +

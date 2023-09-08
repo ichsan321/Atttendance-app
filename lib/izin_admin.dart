@@ -241,7 +241,7 @@ class _izin_adminState extends State<izin_admin> {
                                                 width: 500.0,
                                                 height: 700.0,
                                                 child: Image.network(
-                                                  "https://myattendance-test.000webhostapp.com/izin/${data![index]['email'] + data![index]['date']}.jpg",
+                                                  "https://myattendance-test.000webhostapp.com/izin/${data![index]['email'] + data![index]['date']}",
                                                   fit: BoxFit.cover,
                                                   errorBuilder: (context, error,
                                                       stackTrace) {

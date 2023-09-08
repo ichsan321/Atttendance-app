@@ -197,6 +197,9 @@ class _cuti_adminState extends State<cuti_admin> {
                                             style: TextStyle(
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.bold)),
+                                        Text("Cuti : " +
+                                            data![index]['totalcuti'] +
+                                            " Hari"),
                                         SizedBox(
                                           height: 5,
                                         ),
