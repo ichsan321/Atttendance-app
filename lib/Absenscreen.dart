@@ -147,12 +147,12 @@ class _AbsenscreenState extends State<Absenscreen> {
                         elevation: 2,
                         child: InkWell(
                           child: Padding(
-                            padding: const EdgeInsets.all(2.0),
+                            padding: const EdgeInsets.only(top: 10, bottom: 10),
                             child: Row(
                               children: <Widget>[
                                 Expanded(
                                   child: Container(
-                                    color: Colors.grey[300],
+                                    // color: Colors.grey[300],
                                     child: Column(
                                       children: <Widget>[
                                         Text(
