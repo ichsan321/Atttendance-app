@@ -142,6 +142,12 @@ class _cutipegawaiadminState extends State<cutiuseroverview> {
                                   SizedBox(
                                     height: 5,
                                   ),
+                                  Text("Total Cuti : " +
+                                      data![index]['totalcuti'] +
+                                      " hari"),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
                                   Text("Keterangan : " +
                                       data![index]['keterangan']),
                                   SizedBox(
