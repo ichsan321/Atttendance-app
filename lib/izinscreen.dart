@@ -50,7 +50,6 @@ class _izinscreenState extends State<izinscreen> {
                 //await refreshList();
               },
               child: ListView.builder(
-
                   //Step 6: Count the data
                   itemCount: data == null ? 1 : data!.length + 1,
                   itemBuilder: (context, index) {
