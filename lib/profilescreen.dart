@@ -73,7 +73,12 @@ class _profilescreenState extends State<profilescreen> {
                                     fontWeight: FontWeight.bold, fontSize: 20),
                               ),
                               Text(widget.user.name + "  "),
-                              Text(widget.user.jabatan + "  "),
+                              Text(
+                                widget.user.jabatan.toUpperCase() + "  ",
+                                style: TextStyle(
+                                  fontStyle: FontStyle.italic,
+                                ),
+                              ),
                             ],
                           ),
                         ),

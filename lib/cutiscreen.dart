@@ -167,7 +167,7 @@ class _cutiscreenState extends State<cutiscreen> {
                         elevation: 2,
                         child: InkWell(
                           child: Padding(
-                            padding: const EdgeInsets.all(2.0),
+                            padding: const EdgeInsets.all(10.0),
                             child: Row(
                               children: <Widget>[
                                 Expanded(
