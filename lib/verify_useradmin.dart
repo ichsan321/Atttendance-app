@@ -379,7 +379,7 @@ class _verify_useradminState extends State<verify_useradmin> {
   }
 
   Future<Null> refreshList() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 3));
     this.makeRequest();
     return null;
   }

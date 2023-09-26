@@ -27,7 +27,7 @@ class profilescreen extends StatefulWidget {
 class _profilescreenState extends State<profilescreen> {
   final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
   late Position _currentPosition;
-  String _currentAddress = " Searching cureent location";
+  String _currentAddress = " Searching current location";
   List? data;
   int number = 0;
   ThemeMode _themeMode = ThemeMode.system;
